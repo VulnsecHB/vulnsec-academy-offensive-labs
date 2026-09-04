@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blocked — Northline Yard Access</title>
+  <link rel="stylesheet" href="{{base}}/static/gate.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">YA</span>
+      <span><strong>Northline Yard Access</strong><small>Contractor passes · Internal</small></span>
+    </a>
+    <nav>
+      <a href="{{base}}/">Check</a>
+      <a href="{{base}}/account">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <main class="block-wrap">
+    <section class="block-card">
+      <p class="kicker">HTTP 403 · perimeter screen</p>
+      <h1>Request blocked</h1>
+      <p>{{reason}}</p>
+      <p class="help">Reference: YARD-SCREEN-4.2. The identifier never reached the directory. Return to the pass check and submit a clean YA- number.</p>
+      <a class="back" href="{{base}}/">Return to pass check</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Perimeter event logged</span>
+  </footer>
+</body>
+</html>

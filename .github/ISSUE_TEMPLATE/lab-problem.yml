@@ -1,0 +1,48 @@
+name: Lab problem
+description: Report a reproducible setup or runtime problem without posting flags or solutions.
+title: "[Lab]: "
+labels:
+  - lab-support
+body:
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: Exact package name and lab ID.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Repository or Student Kit version.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Docker version and Compose version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Include the command and error, but remove flags, recovered passwords and full solutions.
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Status output
+      description: Paste the selected package's status-script output.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I reproduced this only in the supplied local lab environment.
+          required: true

@@ -1,0 +1,7 @@
+:root { --bg:#eef6f1; --ink:#143028; --line:#c5d9ce; }
+* { box-sizing:border-box; }
+html,body { margin:0; background:var(--bg); color:var(--ink); font-family:Georgia,serif; }
+header { padding:24px 8vw; border-bottom:1px solid var(--line); letter-spacing:.2em; font-size:11px; }
+main { padding:48px 8vw; max-width:720px; }
+a { color:#0b6; }
+article { background:#fff; padding:16px 18px; border:1px solid var(--line); margin-top:16px; }

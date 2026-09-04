@@ -1,0 +1,25 @@
+name: vulnsec-class00
+
+services:
+  mission-control:
+    build:
+      context: ./mission-control
+    image: vulnsec-class00-mission-control
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "127.0.0.1:8888:8888"
+    volumes:
+      - ./runtime/lab-state.json:/run/mission-control/lab-state.json:ro
+    tmpfs:
+      - /tmp:size=8m,mode=1777
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8888/healthz', timeout=2).read()"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 2s
+    restart: "no"

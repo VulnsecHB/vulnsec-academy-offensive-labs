@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yard desk — Northline Operations</title>
+  <link rel="stylesheet" href="{{base}}/static/gate.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">YA</span>
+      <span><strong>Northline Yard Access</strong><small>Contractor passes · Internal</small></span>
+    </a>
+    <nav>
+      <a href="{{base}}/">Check</a>
+      <a class="on" href="{{base}}/desk">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <section class="hero slim">
+    <p class="kicker">Signed in</p>
+    <h1>{{display}}</h1>
+    <p>{{title}} · {{role}} · ext. {{ext}}</p>
+  </section>
+
+  <main class="desk-main">
+    {{locker}}
+    <section class="panel">
+      <h2>This shift</h2>
+      <ul class="board">
+        <li><span>YA-10442</span> Harbour Bearings — Yard A west</li>
+        <li><span>YA-22018</span> Tyne Hose — due 30 Aug</li>
+        <li><span>22:00</span> Night gate changeover</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Desk session is logged</span>
+  </footer>
+</body>
+</html>

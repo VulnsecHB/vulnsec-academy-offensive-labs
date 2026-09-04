@@ -1,0 +1,11 @@
+<section class="hero">
+  <p class="kicker">Lock desk</p>
+  <h1>Night operator.</h1>
+  {{notice}}
+  <form method="post" action="{{base}}/lock">
+    <label>Username <input name="username" autocomplete="username"></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password"></label>
+    <button type="submit">Unlock</button>
+  </form>
+</section>
+{{desk}}

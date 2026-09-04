@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finance desk — Northline Operations</title>
+  <link rel="stylesheet" href="{{base}}/static/ledger.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">NF</span>
+      <span><strong>Northline Finance</strong><small>Supplier ledger · Internal</small></span>
+    </a>
+    <nav>
+      <a href="{{base}}/">Lookup</a>
+      <a class="on" href="{{base}}/desk">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <section class="hero slim">
+    <p class="kicker">Signed in</p>
+    <h1>{{display}}</h1>
+    <p>{{title}} · {{role}} · ext. {{ext}}</p>
+  </section>
+
+  <main class="desk-main">
+    {{locker}}
+    <section class="panel">
+      <h2>Today’s batch</h2>
+      <ul class="board">
+        <li><span>INV-44190</span> Harbour Bearings — still held</li>
+        <li><span>INV-12004</span> Awaiting controller initials</li>
+        <li><span>15:10</span> Same-day posting cut-off</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Desk session is logged</span>
+  </footer>
+</body>
+</html>

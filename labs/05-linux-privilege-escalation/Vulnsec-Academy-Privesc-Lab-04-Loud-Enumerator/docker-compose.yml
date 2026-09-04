@@ -1,0 +1,56 @@
+name: vulnsec-privesc-lab04
+
+services:
+  target:
+    build:
+      context: ./target
+    image: vulnsec-privesc-lab04-target
+    security_opt:
+      - no-new-privileges:false
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1/healthz', timeout=2).read()"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
+      start_period: 6s
+    restart: "no"
+    networks:
+      lab04:
+        ipv4_address: "10.23.54.221"
+
+  mission-control:
+    build:
+      context: ./mission-control
+    image: vulnsec-privesc-lab04-mission-control
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "127.0.0.1:8888:8888"
+    volumes:
+      - ./runtime/lab-state.json:/run/mission-control/lab-state.json:ro
+    tmpfs:
+      - /tmp:size=8m,mode=1777
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8888/healthz', timeout=2).read()"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+      start_period: 2s
+    restart: "no"
+    depends_on:
+      target:
+        condition: service_healthy
+    networks:
+      - portal
+
+networks:
+  lab04:
+    ipam:
+      config:
+        - subnet: "10.23.54.0/24"
+          gateway: "10.23.54.1"
+  portal:
+    driver: bridge

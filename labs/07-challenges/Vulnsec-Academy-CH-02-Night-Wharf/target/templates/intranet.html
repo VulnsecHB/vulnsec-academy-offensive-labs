@@ -1,0 +1,14 @@
+<section class="page-hero">
+  <p class="eyebrow">Staff intranet</p>
+  <h1>Directory sign-in</h1>
+  <p>This node is a leftover public stub. It will not open a field session.</p>
+</section>
+<section class="auth">
+  {{notice}}
+  {{error}}
+  <form method="post" action="{{base}}/intranet" autocomplete="off">
+    <label>Username <input name="username" required></label>
+    <label>Password <input name="password" type="password" required></label>
+    <button class="btn solid" type="submit">Sign in</button>
+  </form>
+</section>

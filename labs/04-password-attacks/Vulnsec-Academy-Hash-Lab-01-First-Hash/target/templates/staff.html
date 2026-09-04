@@ -1,0 +1,11 @@
+<section class="hero">
+  <p class="kicker">Staff desk</p>
+  <h1>Operator login.</h1>
+  {{notice}}
+  <form method="post" action="{{base}}/staff">
+    <label>Username <input name="username" autocomplete="username"></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password"></label>
+    <button type="submit">Open desk</button>
+  </form>
+</section>
+{{desk}}

@@ -1,0 +1,38 @@
+Vulnsec Academy Software Licence
+
+SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+
+Software scope
+--------------
+
+Except where another licence is stated in a file or directory, the software in
+this repository is licensed under the PolyForm Noncommercial License 1.0.0.
+This includes source code, Dockerfiles, Compose definitions, lifecycle scripts,
+configuration files and software assets.
+
+The complete, controlling licence terms are available at:
+
+https://polyformproject.org/licenses/noncommercial/1.0.0
+
+Required Notice: Copyright © 2026 Vulnsec Academy.
+
+Licensor identification
+-----------------------
+
+“Vulnsec Academy” is the pseudonymous publishing identity of the individual
+creator and licensor. No legal name is required in redistributed copies; retain
+the Required Notice above as required by the licence.
+
+Material outside this licence
+-----------------------------
+
+Standalone documentation and educational content are covered by
+LICENSE-CONTENT.md. The project name, logos and branding are addressed in
+NOTICE. Third-party components remain subject to their own licence terms.
+
+Commercial permissions
+----------------------
+
+The licence above does not grant commercial-use rights. A separate commercial
+licence may be requested from the project maintainer through the repository's
+published contact or security channels.

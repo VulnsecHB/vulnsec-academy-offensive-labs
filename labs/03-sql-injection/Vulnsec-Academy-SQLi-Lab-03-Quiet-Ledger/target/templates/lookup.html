@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supplier ledger — Northline Finance</title>
+  <link rel="stylesheet" href="{{base}}/static/ledger.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">NF</span>
+      <span><strong>Northline Finance</strong><small>Supplier ledger · Internal</small></span>
+    </a>
+    <nav>
+      <a class="on" href="{{base}}/">Lookup</a>
+      <a href="{{base}}/account">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <section class="hero">
+    <p class="kicker">Accounts payable · public check</p>
+    <h1>Confirm an invoice reference</h1>
+    <p>Suppliers may verify that a reference exists. We do not publish amounts, holds, or line items on this page.</p>
+    <form action="{{base}}/lookup" method="get">
+      <label>Invoice reference
+        <input name="ref" value="{{ref}}" placeholder="INV-44190" autofocus>
+      </label>
+      <button type="submit">Check ledger</button>
+    </form>
+  </section>
+
+  <main>
+    {{result}}
+    <section class="notice-grid">
+      <article>
+        <h2>Cut-off</h2>
+        <p>Same-day posting closes at 15:10. References raised after that appear the next working day.</p>
+      </article>
+      <article>
+        <h2>Format</h2>
+        <p>Current year references start with <b>INV-</b> followed by five digits. Do not include spaces.</p>
+      </article>
+      <article>
+        <h2>Disputes</h2>
+        <p>If a posted invoice is missing, call Finance Control on ext. 3300. Do not send full ledger extracts by mail.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Ledger 1.6.2 · amounts withheld</span>
+  </footer>
+</body>
+</html>

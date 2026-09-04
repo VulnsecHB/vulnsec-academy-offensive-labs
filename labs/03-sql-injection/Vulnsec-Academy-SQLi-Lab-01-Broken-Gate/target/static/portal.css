@@ -1,0 +1,98 @@
+:root {
+  --ink: #0b1f33;
+  --ink-2: #132a42;
+  --paper: #f4efe4;
+  --card: #fffdf8;
+  --line: #d7cfc0;
+  --muted: #6b7280;
+  --gold: #b08a3c;
+  --gold-2: #c9a45a;
+  --bad: #8b2e2e;
+  --warn: #8a5a12;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+a { color: var(--gold); }
+.mark {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  background: var(--gold); color: #1a1408; font-weight: 800; letter-spacing: .04em;
+}
+.kicker { margin: 0 0 8px; color: var(--gold); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+.auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background:
+    linear-gradient(180deg, rgba(11,31,51,.08), transparent 28%),
+    radial-gradient(circle at 88% 0, rgba(176,138,60,.18), transparent 32%),
+    var(--paper);
+}
+.mast { display: flex; gap: 12px; align-items: center; padding: 22px 28px; }
+.mast strong { display: block; font-size: 15px; }
+.mast small { color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-size: 10px; }
+.auth-card {
+  width: min(440px, calc(100% - 40px));
+  margin: 40px auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 36px 34px 28px;
+  box-shadow: 0 20px 50px rgba(11,31,51,.06);
+}
+.auth-card h1 { margin: 0 0 10px; font-size: 28px; letter-spacing: -.03em; }
+.lede { color: #4b5563; font-size: 14px; line-height: 1.6; }
+label { display: block; margin: 16px 0 12px; font-size: 12px; color: #374151; }
+input {
+  display: block; width: 100%; margin-top: 6px; min-height: 44px;
+  border: 1px solid #cfc6b6; background: #fff; padding: 0 12px; font: inherit;
+}
+input:focus { outline: 2px solid rgba(176,138,60,.45); border-color: var(--gold); }
+button[type="submit"] {
+  width: 100%; min-height: 46px; margin-top: 8px; border: 0;
+  background: var(--ink); color: #f8f1e3; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; font-size: 12px; cursor: pointer;
+}
+button[type="submit"]:hover { background: #16324d; }
+.help { font-size: 12px; color: var(--muted); }
+.banner { padding: 10px 12px; font-size: 13px; }
+.banner.bad { background: #f8e8e6; color: var(--bad); border-left: 3px solid var(--bad); }
+.banner.warn { background: #f7ecd8; color: var(--warn); border-left: 3px solid var(--gold); }
+footer {
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  padding: 18px 28px 24px; color: #7b7366; font-size: 11px;
+}
+.app { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+.side {
+  background: var(--ink); color: #d7cfc0; padding: 22px 18px;
+  display: flex; flex-direction: column; gap: 28px;
+}
+.side nav { display: flex; flex-direction: column; gap: 6px; }
+.side a { color: #c9c0b0; text-decoration: none; padding: 8px 10px; font-size: 13px; }
+.side a.on, .side a:hover { background: #16324d; color: #fff; }
+.out { margin-top: auto; }
+.top { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; padding: 36px 40px 10px; }
+.top h1 { margin: 0; font-size: 32px; letter-spacing: -.03em; }
+.who { text-align: right; }
+.who b { display: block; }
+.who small { color: var(--muted); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 24px 40px; }
+.panel, .locker {
+  background: var(--card); border: 1px solid var(--line); padding: 22px 22px 18px;
+}
+.panel h2, .locker h2 { margin: 0 0 10px; font-size: 16px; }
+.panel ul { margin: 0; padding-left: 18px; color: #374151; }
+.locker { margin: 0 40px 40px; background: #1a1408; color: #f4efe4; border-color: #6b5424; }
+.locker h2 { color: var(--gold-2); }
+.flag {
+  display: inline-block; margin-top: 10px; padding: 8px 10px;
+  background: var(--gold); color: #1a1408; font-family: ui-monospace, Consolas, monospace; font-weight: 700;
+}
+@media (max-width: 800px) {
+  .app { grid-template-columns: 1fr; }
+  .grid, .top { padding-inline: 20px; }
+  .locker { margin-inline: 20px; }
+}

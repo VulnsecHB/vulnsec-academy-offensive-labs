@@ -1,0 +1,3 @@
+Week 12 canteen
+coffee  0.80
+roll    1.40

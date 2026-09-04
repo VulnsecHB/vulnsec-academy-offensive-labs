@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Reconnaissance Lab 02 Odd Berth">
+  <title>Atlas Mission Control — Odd Berth</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 01</span><b>RECONNAISSANCE</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 02</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 02</span><i></i> NMAP · ODD PORT</div>
+              <h1>ODD<br><em>BERTH</em></h1>
+              <p>Same job as First Sweep: one host, read the scan. This berth office does not put HTTP on port 80. If the obvious port is closed, widen the list before you decide the box is “just SSH”.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 15–25 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.19</span><small>YARD C BERTH</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.19</code></div>
+              <div class="coordinate-row"><span>SCOPE</span><code>this host only</code></div>
+              <div class="coordinate-row"><span>INTENDED TOOL</span><code>nmap -sV -p-</code></div>
+              <div class="scope-warning"><b>!</b><span>Port 80 may be closed. That is not the end of the scan.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Confirm the assigned berth host</li>
+                <li><span>02</span>Prove TCP 80 is not the web port</li>
+                <li><span>03</span>Find every open TCP port</li>
+                <li><span>04</span>Read the berth identifier on HTTP</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>Nmap</b><small>-sV and -p-</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">B</span><span><b>Browser / curl</b><small>Use the port you found</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">S</span><span><b>SSH client</b><small>Not required this lab</small></span><i>HOLD</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Do not stop at 80.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks your findings. It never runs nmap for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the berth board is at <a href="/site/">/site/</a>. SSH is not available in this preview.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough contains every command, the HTTP port, and the berth identifier. Complete the investigation to unlock it, or reveal it now if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>Closed 80 is not a dead host.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>TARGET</p><b>10.23.54.19</b></div>
+              <i>→</i>
+              <div><span>02</span><p>PORT 80</p><b>closed</b></div>
+              <i>→</i>
+              <div><span>03</span><p>HTTP</p><b>8088</b></div>
+              <i>→</i>
+              <div><span>04</span><p>PROOF</p><b>BC-1908</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">THE OBVIOUS PORT</p>
+                <h3>Check 80, then keep going.</h3>
+                <p>A version scan of port 80 returns <code>closed</code>. That is a finding, not a stop. Default nmap (top 1000) can also miss 8088. On a single authorised host, <code>-p-</code> is cheap and complete.</p>
+                <div class="explain-list">
+                  <div><code>-p80</code><span>Proves the default web port is empty</span></div>
+                  <div><code>-p-</code><span>Every TCP port on this host</span></div>
+                  <div><code>-sV</code><span>Names ssh vs http</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> nmap -sV -p80 10.23.54.19</div>
+                  <div class="terminal-output">
+                    <div class="muted">80/tcp closed http</div>
+                  </div>
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> nmap -sV -p- 10.23.54.19</div>
+                  <div class="terminal-output">
+                    <div class="hot">22/tcp   open  ssh     OpenSSH</div>
+                    <div class="hot">8088/tcp open  http    NorthlineBerth 2.0</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Two open ports. HTTP is 8088, not 80.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">BROWSE THE PORT YOU FOUND</p>
+                <h3>The URL must include 8088.</h3>
+                <p>Browsers default to port 80. <code>http://10.23.54.19/</code> will fail. Point curl or the browser at <code>http://10.23.54.19:8088/</code> and read the header. SSH is in scope; you still do not need to log in.</p>
+                <div class="explain-list">
+                  <div><code>:8088</code><span>Required in the URL</span></div>
+                  <div><code>BC-1908</code><span>Berth identifier</span></div>
+                  <div><code>ssh</code><span>Open, not required</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> curl -s http://10.23.54.19:8088/ | grep -i identifier</div>
+                  <div class="terminal-output">
+                    <div class="flag">Berth identifier BC-1908</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Submit BC-1908 in Atlas.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 02</span>
+                <h3>Berth mapped.</h3>
+                <p>You did not treat a closed port 80 as the whole host. Next in this module is directory fuzzing — the ports will be obvious; the path will not.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+
+            <section class="walkthrough-step last-step">
+              <div class="step-copy">
+                <span class="step-number">R</span>
+                <p class="section-label">REMINDER</p>
+                <h3>Top 1000 is a shortcut, not a promise.</h3>
+                <p>On a single in-scope host, <code>-p-</code> is the honest scan. On a large range you would not do that — here you have one address, so you can.</p>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose every command, the HTTP port, and the berth identifier. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

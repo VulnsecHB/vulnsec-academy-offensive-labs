@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Second Hold">
+  <title>Atlas Mission Control — Second Hold</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 04</span><b>PIVOTING</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 03</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 03</span><i></i> DOUBLE HOP · -J</div>
+              <h1>SECOND<br><em>HOLD</em></h1>
+              <p>The inner SSH box is not the flag. It is hop two. Read the notes, jump, then forward to a third net Kali has never heard of.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 30–45 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>SSH -J</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.254</span><small>HOP 1</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.254</code></div>
+              <div class="coordinate-row"><span>OPERATOR</span><code>r.hold / Jump-254</code></div>
+              <div class="coordinate-row"><span>HOP 2</span><code>k.well @ 10.24.10.30</code></div>
+              <div class="scope-warning"><b>!</b><span>Hop 2 credentials are on hop 1. The vault is on 10.24.20.0/24.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>SSH hop 1</li>
+                <li><span>02</span>Read hop 2 creds</li>
+                <li><span>03</span>ProxyJump -J</li>
+                <li><span>04</span>Forward to 10.24.20.5</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">J</span><span><b>-J</b><small>ProxyJump</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">2</span><span><b>k.well</b><small>Second SSH</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">L</span><span><b>-L again</b><small>Through hop 2</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Two hops, then a forward.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks findings. It never jumps for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the vault page is at <a href="/site/">/site/</a>.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names hop 2, -J, the vault IP, and the flag.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>The flag is one net deeper.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>HOP 1</p><b>10.23.54.254</b></div>
+              <i>→</i>
+              <div><span>02</span><p>HOP 2</p><b>10.24.10.30</b></div>
+              <i>→</i>
+              <div><span>03</span><p>JUMP</p><b>-J</b></div>
+              <i>→</i>
+              <div><span>04</span><p>VAULT</p><b>10.24.20.5</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">HOP 2</p>
+                <h3>Creds on hop 1. Shell on hop 2.</h3>
+                <p><code>well.txt</code> on r.hold names <code>k.well@10.24.10.30</code> and the password. <code>-J</code> makes hop 1 the jump. From hop 2, <code>vault.txt</code> names <code>10.24.20.5</code>.</p>
+                <div class="explain-list">
+                  <div><code>r.hold</code><span>Jump-254</span></div>
+                  <div><code>k.well</code><span>Deep-Hold</span></div>
+                  <div><code>-J</code><span>ProxyJump</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — jump</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ssh r.hold@10.23.54.254</div>
+                  <div class="terminal-output"><div class="hot">k.well@10.24.10.30  Deep-Hold</div></div>
+                  <div class="command-line"><b>└─$</b> ssh -J r.hold@10.23.54.254 k.well@10.24.10.30</div>
+                </div>
+                <figcaption><i>i</i>Accept both host keys. Password for hop 1, then hop 2.</figcaption>
+              </figure>
+            </section>
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">VAULT</p>
+                <h3>Forward through the second hop.</h3>
+                <p>Hop 2 can reach 10.24.20.5. Kali still cannot. Combine jump and local forward in one command.</p>
+                <div class="explain-list">
+                  <div><code>10.24.20.5</code><span>Vault HTTP</span></div>
+                  <div><code>-J … -L</code><span>Jump, then forward</span></div>
+                  <div><code>PIV{second_hold}</code><span>Vault page</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — vault</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ssh -J r.hold@10.23.54.254 -L 8000:10.24.20.5:80 k.well@10.24.10.30</div>
+                  <div class="command-line"><b>└─$</b> curl -s http://127.0.0.1:8000/</div>
+                  <div class="terminal-output"><div class="flag">PIV{second_hold}</div></div>
+                </div>
+                <figcaption><i>i</i>SOCKS from hop 2 also works: ssh -J … -D 9050 then proxychains curl 10.24.20.5</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 03</span>
+                <h3>Hold cleared.</h3>
+                <p>You chained two SSH hops and only then opened the last HTTP. That is the pivoting module.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose hop 2, the jump command, the vault IP, and the flag. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+"""Northline Harwich stores desk — public site + hidden /internal (no SQLi)."""
+
+from __future__ import annotations
+
+import os
+from http import HTTPStatus
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+
+
+APP_ROOT = Path(__file__).resolve().parent
+BASE_PATH = os.environ.get("BASE_PATH", "").rstrip("/")
+
+
+def render(name: str, **values: str) -> bytes:
+    text = (APP_ROOT / "templates" / name).read_text(encoding="utf-8")
+    for key, value in values.items():
+        text = text.replace("{{" + key + "}}", value)
+    return text.encode("utf-8")
+
+
+def page(name: str, title: str, active: str) -> bytes:
+    nav = "".join(
+        f'<a class="{"on" if key == active else ""}" href="{BASE_PATH}{href}">{label}</a>'
+        for href, key, label in (
+            ("/", "home", "Home"),
+            ("/stores", "stores", "Stores"),
+            ("/contact", "contact", "Contact"),
+        )
+    )
+    return render("layout.html", title=title, nav=nav, base=BASE_PATH, body=render(name, base=BASE_PATH).decode())
+
+
+class StoresHandler(BaseHTTPRequestHandler):
+    server_version = "NorthlineStores/3.0"
+
+    def log_message(self, message: str, *args) -> None:
+        print(f"{self.address_string()} - {message % args}", flush=True)
+
+    def route(self) -> str:
+        path = self.path.split("?", 1)[0]
+        if path != "/" and path.endswith("/"):
+            path = path[:-1]
+        if BASE_PATH and (path == BASE_PATH or path.startswith(BASE_PATH + "/")):
+            path = path[len(BASE_PATH) :] or "/"
+        return path
+
+    def send_html(self, payload: bytes, status: HTTPStatus = HTTPStatus.OK) -> None:
+        self.send_response(status)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(payload)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def send_bytes(self, payload: bytes, content_type: str, status: HTTPStatus = HTTPStatus.OK) -> None:
+        self.send_response(status)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        self.wfile.write(payload)
+
+    def do_GET(self) -> None:  # noqa: N802
+        path = self.route()
+        if path == "/healthz":
+            self.send_bytes(b'{"status":"ok"}', "application/json")
+            return
+        if path == "/static/stores.css":
+            self.send_bytes((APP_ROOT / "static" / "stores.css").read_bytes(), "text/css; charset=utf-8")
+            return
+        if path == "/robots.txt":
+            body = (
+                "User-agent: *\n"
+                "Disallow: /backup/\n"
+                "Disallow: /intranet-old/\n"
+            ).encode()
+            self.send_bytes(body, "text/plain; charset=utf-8")
+            return
+        if path == "/":
+            self.send_html(page("home.html", "Harwich Stores Desk — Northline", "home"))
+            return
+        if path == "/stores":
+            self.send_html(page("stores.html", "Stores list — Northline", "stores"))
+            return
+        if path == "/contact":
+            self.send_html(page("contact.html", "Contact — Northline", "contact"))
+            return
+        if path == "/internal":
+            self.send_html(render("internal.html", base=BASE_PATH))
+            return
+        if path in {"/backup", "/intranet-old"}:
+            self.send_html(b"<h1>Not found</h1>", HTTPStatus.NOT_FOUND)
+            return
+        self.send_html(b"<h1>Not found</h1>", HTTPStatus.NOT_FOUND)
+
+
+def main() -> None:
+    port = int(os.environ.get("PORT", "80"))
+    server = ThreadingHTTPServer(("0.0.0.0", port), StoresHandler)
+    print(f"Northline stores desk listening on port {port}", flush=True)
+    server.serve_forever()
+
+
+if __name__ == "__main__":
+    main()

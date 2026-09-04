@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — FTP Lab 01 Open Hatch">
+  <title>Atlas Mission Control — Open Hatch</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 05</span><b>SERVICE ACCESS</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 02</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 02</span><i></i> FTP · ANONYMOUS</div>
+              <h1>OPEN<br><em>HATCH</em></h1>
+              <p>A freight hatch still answers on 21. The notice on 80 tells contractors the inbound sheet is served over FTP. Anonymous is on. List, get, read — that is the whole job.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 15–25 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>NMAP / FTP</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.67</span><small>HATCH HOST</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.67</code></div>
+              <div class="coordinate-row"><span>EXPECTED</span><code>FTP 21</code></div>
+              <div class="coordinate-row"><span>INTENDED TOOLS</span><code>nmap · ftp</code></div>
+              <div class="scope-warning"><b>!</b><span>No bounce, no vsftpd backdoor. Anonymous listing is the lesson.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Find the FTP port</li>
+                <li><span>02</span>Log in anonymously</li>
+                <li><span>03</span>List and download the inbound sheet</li>
+                <li><span>04</span>Submit the flag</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>nmap</b><small>-sV the host</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">F</span><span><b>ftp</b><small>anonymous + empty pass</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>get</b><small>Pull the manifest</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Anonymous still means anyone.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks findings. It never runs ftp for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the hatch notice is at <a href="/site/">/site/</a>.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names the port, the login, the filename, and the flag. Complete the investigation, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>Empty password, real files.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>PORT</p><b>21</b></div>
+              <i>→</i>
+              <div><span>02</span><p>USER</p><b>anonymous</b></div>
+              <i>→</i>
+              <div><span>03</span><p>FILE</p><b>inbound-manifest</b></div>
+              <i>→</i>
+              <div><span>04</span><p>FLAG</p><b>get + cat</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">SCAN + LOGIN</p>
+                <h3>21 is still a door.</h3>
+                <p><code>nmap -sV</code> shows vsftpd on 21. HTTP 80 is a contractor notice — it does not hold the flag. Connect with the system <code>ftp</code> client. When it asks for a name, <code>anonymous</code> with an empty password (or any email) is enough. That is the misconfig.</p>
+                <div class="explain-list">
+                  <div><code>21/tcp</code><span>FTP / vsftpd</span></div>
+                  <div><code>anonymous</code><span>No password required</span></div>
+                  <div><code>ls / get</code><span>Read-only listing</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> nmap -sV 10.23.54.67</div>
+                  <div class="terminal-output">
+                    <div class="hot">21/tcp open  ftp     vsftpd</div>
+                    <div>80/tcp open  http    Northline hatch notice</div>
+                  </div>
+                  <div class="command-line"><b>└─$</b> ftp 10.23.54.67</div>
+                  <div class="terminal-output">
+                    <div>Name: anonymous</div>
+                    <div class="muted">Password: (empty)</div>
+                    <div class="hot">230 Login successful.</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>If PASV fails, type <code>passive</code> or <code>epsv</code> at the ftp prompt.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">LIST + GET</p>
+                <h3>The inbound sheet is the flag.</h3>
+                <p><code>ls</code> shows a README and <code>inbound-manifest.txt</code>. Get the manifest to Kali and read it. Do not hunt for a writeable upload — this lab is read-only anonymous.</p>
+                <div class="explain-list">
+                  <div><code>inbound-manifest.txt</code><span>Flag file</span></div>
+                  <div><code>get</code><span>Download to cwd</span></div>
+                  <div><code>FTP{open_hatch_anon}</code><span>Inside the sheet</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>ftp</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>ftp></b> ls</div>
+                  <div class="terminal-output">
+                    <div>README.txt</div>
+                    <div class="hot">inbound-manifest.txt</div>
+                  </div>
+                  <div class="command-line"><b>ftp></b> get inbound-manifest.txt</div>
+                  <div class="command-line"><b>└─$</b> cat inbound-manifest.txt</div>
+                  <div class="terminal-output"><div class="flag">FTP{open_hatch_anon}</div></div>
+                </div>
+                <figcaption><i>i</i>Next lab is the same idea over SMB: list shares, guest get.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 02</span>
+                <h3>Hatch open.</h3>
+                <p>Anonymous FTP is a leftover default, not a puzzle. Treat 21 like 445: if it answers, try guest before you hunt credentials.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose the port, the login, the filename, and the flag. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

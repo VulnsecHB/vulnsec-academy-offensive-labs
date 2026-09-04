@@ -1,0 +1,13 @@
+NORTHLINE INBOUND — Grangemouth hatch
+Sheet 67 / night cutover
+
+Berth   Unit        Status
+A3      NL-4412     cleared
+A4      NL-4418     hold
+B1      NL-4501     inbound
+
+Flag for the authorised operator:
+
+FTP{open_hatch_anon}
+
+End of sheet.

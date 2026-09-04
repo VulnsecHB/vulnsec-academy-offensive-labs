@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — One Door Down">
+  <title>Atlas Mission Control — One Door Down</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 04</span><b>PIVOTING</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 01</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 01</span><i></i> LOCAL FORWARD · -L</div>
+              <h1>ONE<br><em>DOOR</em></h1>
+              <p>You have SSH on the edge. The yard desk lives on a second NIC. Kali cannot route there. One local port forward is the whole lesson.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 20–35 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>SSH -L</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.240</span><small>EDGE NODE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.240</code></div>
+              <div class="coordinate-row"><span>OPERATOR</span><code>p.keel / Berth-240</code></div>
+              <div class="coordinate-row"><span>HIDDEN DESK</span><code>10.24.10.12</code></div>
+              <div class="scope-warning"><b>!</b><span>Do not publish the inner net. If curl to 10.24.10.12 works from Kali, the isolation rule is missing.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>SSH to the edge</li>
+                <li><span>02</span>Read the inner IP</li>
+                <li><span>03</span>Prove Kali cannot reach it</li>
+                <li><span>04</span>Forward -L and take the flag</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">S</span><span><b>ssh</b><small>Foothold</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">L</span><span><b>-L</b><small>Local forward</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">C</span><span><b>curl</b><small>127.0.0.1:8000</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Tunnel one port.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks findings. It never opens the tunnel for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the yard desk (what the tunnel would show) is at <a href="/site/">/site/</a>.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names the inner IP, the -L command, and the flag. Complete the investigation, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>Kali is not on that net.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>EDGE</p><b>10.23.54.240</b></div>
+              <i>→</i>
+              <div><span>02</span><p>INNER</p><b>10.24.10.12</b></div>
+              <i>→</i>
+              <div><span>03</span><p>FLAG</p><b>-L</b></div>
+              <i>→</i>
+              <div><span>04</span><p>FLAG</p><b>yard desk</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">GAP</p>
+                <h3>SSH in. Curl from Kali fails.</h3>
+                <p>Log in as <code>p.keel</code>. <code>note.txt</code> names <code>10.24.10.12</code>. From the foothold, <code>curl http://10.24.10.12/</code> works. From Kali it dies. That is the whole topology.</p>
+                <div class="explain-list">
+                  <div><code>p.keel</code><span>Berth-240</span></div>
+                  <div><code>10.24.10.12</code><span>Inner HTTP</span></div>
+                  <div><code>-L</code><span>Kali listens, foothold connects</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — ssh</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ssh p.keel@10.23.54.240</div>
+                  <div class="terminal-output"><div class="muted">password: Berth-240</div><div class="hot">Yard desk … 10.24.10.12</div></div>
+                  <div class="command-line"><b>└─$</b> curl --max-time 3 http://10.24.10.12/</div>
+                  <div class="terminal-output"><div class="muted">timeout / no route</div></div>
+                </div>
+                <figcaption><i>i</i>Failing from Kali is the finding. Do not skip it.</figcaption>
+              </figure>
+            </section>
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">FORWARD</p>
+                <h3>Listen locally. Fetch through the hop.</h3>
+                <p><code>-L 8000:10.24.10.12:80</code> means: bind 8000 on Kali, and let the SSH server open 10.24.10.12:80. Leave that session open. Browse 127.0.0.1:8000, not the inner IP.</p>
+                <div class="explain-list">
+                  <div><code>-L</code><span>Local forward</span></div>
+                  <div><code>8000</code><span>Any free local port</span></div>
+                  <div><code>PIV{one_door_down}</code><span>Yard desk</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — -L</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ssh -L 8000:10.24.10.12:80 p.keel@10.23.54.240</div>
+                  <div class="command-line"><b>└─$</b> curl -s http://127.0.0.1:8000/</div>
+                  <div class="terminal-output"><div class="flag">PIV{one_door_down}</div></div>
+                </div>
+                <figcaption><i>i</i>-D is the next lab. Do not skip -L.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 01</span>
+                <h3>Door opened.</h3>
+                <p>You proved the gap, then forwarded one port. Next lab: SOCKS, because one -L per service does not scale.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose the inner IP, the ssh -L command, and the flag. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

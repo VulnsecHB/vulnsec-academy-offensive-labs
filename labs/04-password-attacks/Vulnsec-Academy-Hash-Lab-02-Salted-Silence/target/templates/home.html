@@ -1,0 +1,15 @@
+<section class="hero">
+  <p class="kicker">Night lock</p>
+  <h1>Same dump idea. Different digest.</h1>
+  <p>This node stores operator passwords as salted Unix hashes. An export of the shadow-style file is on the Export page. The lock desk still wants the real password.</p>
+</section>
+<section class="band">
+  <article>
+    <h2>Salt</h2>
+    <p>The same password hashes to a different string on every salt. Rainbow tables for raw MD5 will not help.</p>
+  </article>
+  <article>
+    <h2>Rules</h2>
+    <p>If rockyou misses, mutate: capitalize, append a digit. Do that in john/hashcat — not by guessing in the form.</p>
+  </article>
+</section>

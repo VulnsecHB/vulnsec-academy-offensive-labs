@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — SQL Injection Lab 01 Broken Gate">
+  <title>Atlas Mission Control — Broken Gate</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 03</span><b>WEB APPLICATION ATTACKS</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 01</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 6 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 01</span><i></i> ENTRY LEVEL</div>
+              <h1>BROKEN<br><em>GATE</em></h1>
+              <p>Northline Operations exposed an internal staff portal on the investigation network. Discover the host, reach the login page, and determine whether the authentication gate can be forced open without valid credentials.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 20–30 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node gateway-node"><i></i><span data-gateway>10.23.54.1</span><small>GATEWAY</small></div>
+              <div class="node target-node"><i></i>UNKNOWN<small>FIELD NODE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>AWAITING DISCOVERY</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>AUTHORIZED SCOPE</span><code data-scope>10.23.54.0/24</code></div>
+              <div class="coordinate-row"><span>KNOWN GATEWAY</span><code data-gateway>10.23.54.1</code></div>
+              <div class="coordinate-row"><span>EXPECTED SERVICE</span><code>TCP / <span data-port>80</span></code></div>
+              <div class="scope-warning"><b>!</b><span>Do not scan outside the supplied range.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Map live hosts inside the authorized subnet</li>
+                <li><span>02</span>Isolate the unknown node from the gateway</li>
+                <li><span>03</span>Fingerprint the exposed web service</li>
+                <li><span>04</span>Bypass the staff login and recover the flag</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>Nmap</b><small>Host and service discovery</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">B</span><span><b>Browser</b><small>Inspect the staff portal</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">T</span><span><b>Terminal</b><small>Manual HTTP checks</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Follow the signal.</h2>
+              </div>
+              <span id="cleared-copy">0/6 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / DEFINE SCOPE</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks your findings. It never scans the subnet or exploits the portal for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the Northline staff portal is available at <a href="/staff/">/staff/</a> so you can try the login gate here.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough contains every command, payload, and the flag. Complete the investigation to unlock it automatically, or reveal it now if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>From subnet to session.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>DISCOVER</p><b>Map the subnet</b></div>
+              <i>→</i>
+              <div><span>02</span><p>IDENTIFY</p><b>HTTP on TCP 80</b></div>
+              <i>→</i>
+              <div><span>03</span><p>INJECT</p><b>Auth SQLi</b></div>
+              <i>→</i>
+              <div><span>04</span><p>CAPTURE</p><b>Admin flag</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">HOST DISCOVERY</p>
+                <h3>Find every live address.</h3>
+                <p>Use a discovery-only scan across the exact authorized range. The gateway is known; the other live address is the staff portal.</p>
+                <div class="explain-list">
+                  <div><code>nmap</code><span>Launches the network scanner</span></div>
+                  <div><code>-sn</code><span>Host discovery only — skip the port scan</span></div>
+                  <div><code>/24</code><span>Covers the supplied Northline subnet</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> nmap -sn 10.23.54.0/24</div>
+                  <div class="terminal-output">
+                    <div class="muted">Nmap scan report for 10.23.54.1</div>
+                    <div>Host is up (0.00018s latency).</div>
+                    <div class="hot">Nmap scan report for 10.23.54.47</div>
+                    <div>Host is up (0.00012s latency).</div>
+                    <div class="accent">Nmap done: 256 IP addresses (2 hosts up)</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Two hosts should answer: the gateway and one field node.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">SERVICE FINGERPRINTING</p>
+                <h3>Ask the node what it serves.</h3>
+                <p>Remove the known gateway. Probe TCP 80 on the remaining address and confirm it is an HTTP service before you open a browser.</p>
+                <div class="explain-list">
+                  <div><code>-Pn</code><span>Treats the selected host as online</span></div>
+                  <div><code>-sV</code><span>Identifies service product and version</span></div>
+                  <div><code>-p80</code><span>Tests only the authorized web port</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> nmap -Pn -sV -p80 10.23.54.47</div>
+                  <div class="terminal-output">
+                    <div class="muted">PORT   STATE SERVICE VERSION</div>
+                    <div class="hot">80/tcp open  http    Werkzeug / Python</div>
+                    <div class="accent">Nmap done: 1 IP address (1 host up)</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Then open http://<TARGET>/ in a browser.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">03</span>
+                <p class="section-label">AUTHENTICATION SQLi</p>
+                <h3>Break the login query.</h3>
+                <p>Northline Staff Access concatenates the username into a SQL statement. A tautology in that field, plus a comment, skips the password check and returns the first matching row — the administrator.</p>
+                <div class="explain-list">
+                  <div><code>' OR 1=1--</code><span>Makes the WHERE clause always true</span></div>
+                  <div><code>--</code><span>Comments out the password predicate</span></div>
+                  <div><code>username</code><span>The unsafe, concatenated parameter</span></div>
+                </div>
+                <div class="callout"><b>WHY THIS WORKS</b><span>The application builds SQL with string formatting instead of a parameterized query. The database therefore executes attacker-controlled logic.</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>staff access — login</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>Username</b> ' OR 1=1--</div>
+                  <div class="command-line"><b>Password</b> anything</div>
+                  <div class="terminal-output">
+                    <div class="accent">Signed in as A. Reeves</div>
+                    <div class="hot">Role: Access Administrator</div>
+                    <div class="muted">Incident locker unlocked</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>A trailing space after -- is required on some SQL dialects.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">04</span>
+                <p class="section-label">PROOF</p>
+                <h3>Collect the admin flag.</h3>
+                <p>The administrator dashboard exposes a sealed incident note. Copy the complete flag, including the braces, and submit it in Mission Control.</p>
+                <div class="explain-list">
+                  <div><code>dashboard</code><span>Authenticated landing page</span></div>
+                  <div><code>SQLI{…}</code><span>Exact value, case-sensitive</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>northline — admin</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="terminal-output">
+                    <div class="muted">SEALED INCIDENT NOTE — ACCESS CONTROL</div>
+                    <div class="flag">SQLI{broken_gate_northline_admin}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Submit this exact value in the investigation panel.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 01</span>
+                <h3>Gate forced open.</h3>
+                <p>You discovered the node, identified the staff portal, and proved the login query could be rewritten from the username field.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">06 / 06</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+
+            <section class="walkthrough-step last-step">
+              <div class="step-copy">
+                <span class="step-number">R</span>
+                <p class="section-label">REMEDIATION</p>
+                <h3>Never concatenate SQL.</h3>
+                <p>Use parameterized queries, hash passwords, and grant the application account only the statements it needs. A tautology in a login form should never become a session.</p>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>policy note</b><em>HARDENING</em></div>
+                <div class="terminal-body">
+                  <div class="terminal-output">
+                    <div class="muted"># Bad — string-built SQL</div>
+                    <div>WHERE username = '{user}' AND password = '{pw}'</div>
+                    <div>&nbsp;</div>
+                    <div class="muted"># Better — bound parameters</div>
+                    <div class="accent">WHERE username = ? AND password_hash = ?</div>
+                  </div>
+                </div>
+              </figure>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose every command, payload, and flag before you complete the mission. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>Progressive hints remain available in every investigation step.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

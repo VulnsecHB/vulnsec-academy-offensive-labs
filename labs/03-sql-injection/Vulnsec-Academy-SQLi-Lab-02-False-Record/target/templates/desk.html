@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materials desk — Northline Operations</title>
+  <link rel="stylesheet" href="{{base}}/static/catalog.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">NL</span>
+      <span><strong>Northline Materials</strong><small>Spares · Internal catalog</small></span>
+    </a>
+    <nav>
+      <a href="{{base}}/">Catalog</a>
+      <a class="on" href="{{base}}/desk">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <section class="hero desk-hero">
+    <div>
+      <p class="kicker">Signed in</p>
+      <h1>{{display}}</h1>
+      <p>{{title}} · {{role}} · ext. {{ext}}</p>
+    </div>
+  </section>
+
+  <main class="desk-main">
+    {{locker}}
+    <section class="panel">
+      <h2>Today’s board</h2>
+      <ul class="board">
+        <li><span>NL-2188</span> Coupler pins — keep 30 on Yard A</li>
+        <li><span>NL-9012</span> Hose lot delayed from Immingham</li>
+        <li><span>BAY-2</span> Night count due 22:00</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Desk session is logged</span>
+  </footer>
+</body>
+</html>

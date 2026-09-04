@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff sign-in — Northline Materials</title>
+  <link rel="stylesheet" href="{{base}}/static/catalog.css">
+</head>
+<body class="auth-body">
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">NL</span>
+      <span><strong>Northline Materials</strong><small>Spares · Internal catalog</small></span>
+    </a>
+    <nav>
+      <a href="{{base}}/">Catalog</a>
+      <a class="on" href="{{base}}/account">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <main class="auth-wrap">
+    <section class="auth-card">
+      <p class="kicker">Materials desk</p>
+      <h1>Sign in</h1>
+      <p class="lede">Use your stores directory account. Clerk desks cannot open sealed requisitions.</p>
+      {{notice}}
+      {{error}}
+      <form method="post" action="{{base}}/account" autocomplete="off">
+        <label>Directory username
+          <input name="username" required autofocus placeholder="first.last">
+        </label>
+        <label>Password
+          <input name="password" type="password" required>
+        </label>
+        <button type="submit">Open desk</button>
+      </form>
+      <p class="help">Password resets: Materials Control, ext. 4400. Do not share desk sessions.</p>
+    </section>
+    <aside class="auth-note">
+      <h2>Why sign in?</h2>
+      <ul>
+        <li>View sealed requisitions assigned to your yard</li>
+        <li>Release holds on coupler and hydraulic stock</li>
+        <li>Audit trail retained for 180 days</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Catalog 3.1.8</span>
+  </footer>
+</body>
+</html>

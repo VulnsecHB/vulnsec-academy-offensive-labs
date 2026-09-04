@@ -1,0 +1,14 @@
+:root { --bg:#f7f4ef; --ink:#1a1a18; --salt:#e4572e; --muted:#6f6a62; }
+* { box-sizing:border-box; }
+html,body { margin:0; background:var(--bg); color:var(--ink); font-family:"Helvetica Neue",Arial,sans-serif; }
+header { padding:28px 8vw; display:flex; justify-content:space-between; border-bottom:4px solid var(--salt); }
+.brand { font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+nav a { color:var(--ink); margin-left:16px; text-decoration:none; }
+main { padding:64px 8vw; max-width:880px; }
+h1 { font-size:clamp(40px,7vw,68px); letter-spacing:-.05em; line-height:.95; }
+.lede { color:var(--muted); max-width:36em; line-height:1.65; }
+form { margin-top:28px; display:flex; gap:8px; }
+input { flex:1; padding:12px; border:1px solid #d7d0c6; }
+button { background:var(--salt); color:#fff; border:0; padding:12px 18px; }
+ul { line-height:1.8; }
+footer { padding:24px 8vw; color:#9a948b; font-size:12px; }

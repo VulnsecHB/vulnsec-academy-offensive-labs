@@ -1,0 +1,7 @@
+
+html,body{margin:0;background:#10160f;color:#e7f0e4;font-family:Georgia,serif}
+header{padding:18px 28px;background:#1c2618;color:#b7d59a}
+main{padding:48px 28px;max-width:640px}
+.k{letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:#b7d59a}
+h1{font-size:34px}
+.flag{font-family:ui-monospace,monospace;background:#b7d59a;color:#10160f;display:inline-block;padding:10px 14px}

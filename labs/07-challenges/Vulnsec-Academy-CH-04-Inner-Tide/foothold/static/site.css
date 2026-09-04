@@ -1,0 +1,9 @@
+:root { --bg:#0f1418; --ink:#dbe6ea; --teal:#3ecfcf; --muted:#7d8b92; }
+* { box-sizing:border-box; }
+html,body { margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans",sans-serif; }
+header { padding:24px 8vw; border-bottom:1px solid #1e2a30; letter-spacing:.18em; font-size:11px; color:var(--teal); }
+main { padding:56px 8vw; max-width:760px; }
+h1 { font-size:48px; letter-spacing:-.04em; }
+.lede { color:var(--muted); line-height:1.7; }
+pre { background:#0a0f12; padding:16px; overflow:auto; color:var(--teal); }
+a { color:var(--teal); }

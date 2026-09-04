@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pass check — Northline Yard Access</title>
+  <link rel="stylesheet" href="{{base}}/static/gate.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">YA</span>
+      <span><strong>Northline Yard Access</strong><small>Contractor passes · Internal</small></span>
+    </a>
+    <nav>
+      <a class="on" href="{{base}}/">Check</a>
+      <a href="{{base}}/account">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <div class="screen-banner"><b>PERIMETER SCREEN</b><span>Active — spaced SQL keywords are dropped at the gate</span></div>
+
+  <section class="hero">
+    <p class="kicker">Yard A / C · visitor & contractor</p>
+    <h1>Check a yard pass</h1>
+    <p>Gate staff and contractors may confirm a pass identifier. Holders of a valid pass can enter the listed zone until the date shown.</p>
+    <form action="{{base}}/check" method="get">
+      <label>Pass identifier
+        <input name="pass" value="{{pass_id}}" placeholder="YA-10442" autofocus>
+      </label>
+      <button type="submit">Check pass</button>
+    </form>
+  </section>
+
+  <main>
+    {{result}}
+    <section class="notice-grid">
+      <article>
+        <h2>Format</h2>
+        <p>Current passes start with <b>YA-</b> and five digits. Do not add spaces or a site prefix.</p>
+      </article>
+      <article>
+        <h2>Screen</h2>
+        <p>Unusual query strings are blocked by the yard perimeter. If you see a block page, simplify the identifier and try again.</p>
+      </article>
+      <article>
+        <h2>Lost pass</h2>
+        <p>Report a missing pass to the marshal on ext. 2200 before the next shift change.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Yard Access 4.2.0 · perimeter on</span>
+  </footer>
+</body>
+</html>

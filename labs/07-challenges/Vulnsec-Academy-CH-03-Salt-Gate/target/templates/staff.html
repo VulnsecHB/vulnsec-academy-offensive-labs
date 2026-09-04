@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff desk — Salt Gate</title>
+  <link rel="stylesheet" href="{{base}}/static/site.css">
+</head>
+<body>
+  <header>SALT GATE · STAFF DESK · POLICY 9+ MIXED</header>
+  <main>
+    <h1>Directory lookup</h1>
+    <form><input name="q" value="{{q}}" placeholder="username contains"><button>Lookup</button></form>
+    <p class="error">{{error}}</p>
+    <table>
+      <tr><th>user</th><th>role</th><th>note</th></tr>
+      {{rows}}
+    </table>
+  </main>
+</body>
+</html>

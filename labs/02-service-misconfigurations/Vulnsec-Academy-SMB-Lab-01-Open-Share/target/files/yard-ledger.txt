@@ -1,0 +1,11 @@
+NORTHLINE YARD LEDGER — records host 74
+
+Shift    Clerk       Note
+night    m.hale      berth A closed
+night    k.vale      guest share left open for contractors
+
+Authorised operator flag:
+
+SMB{open_share_yard}
+
+End of ledger.

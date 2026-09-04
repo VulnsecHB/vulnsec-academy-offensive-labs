@@ -1,0 +1,5 @@
+# /etc/shadow excerpt — yard clerks only
+root:*:19700:0:99999:7:::
+m.holden:$1$cw3Q9/mM$FzQgwvGOtz9jCcPfJauN3/:19700:0:99999:7:::
+s.admin:$6$SFxtcOmse1FFvqct$ZrESDpQoz9HBW7SWNb3MB9jWycp2CPinMSO3RMbgwWFThxt79wd2i6UkuBK57m7BU3ycPdDtkgrJsDR7aAfSw/:19700:0:99999:7:::
+printer:$1$deadbeef$notarealhashxxxxxxxxxx:19700:0:99999:7:::

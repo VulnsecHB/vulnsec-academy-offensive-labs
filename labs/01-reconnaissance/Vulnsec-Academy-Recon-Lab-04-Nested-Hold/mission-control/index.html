@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Mission Control — Reconnaissance Lab 04 Nested Hold">
+  <title>Atlas Mission Control — Nested Hold</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas Mission Control home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>MODULE 01</span><b>RECONNAISSANCE</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Mission navigation">
+        <div class="rail-label">TRACE // 04</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="investigation"><span>02</span><i></i><em>Investigate</em></button>
+          <button data-view-target="walkthrough"><span>03</span><i></i><em>Debrief</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>PROGRESS</span><b id="progress-percent">0%</b></div>
+          <div class="progress-track"><i id="progress-bar"></i></div>
+          <small id="progress-copy">0 / 5 objectives cleared</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>LAB 04</span><i></i> WEB FUZZING · FILES</div>
+              <h1>NESTED<br><em>HOLD</em></h1>
+              <p>The records catalogue looks finished. It is not. Find the unlisted folder, then fuzz <em>inside</em> it. Backup extensions matter — a directory-only scan of that folder will come back empty.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="investigation">Begin investigation <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 25–35 MIN</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Stylized lab network map">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>OPERATOR</small></div>
+              <div class="node target-node"><i></i><span data-target>10.23.54.38</span><small>RECORDS OFFICE</small></div>
+              <div class="radar-caption"><span>LIVE TOPOLOGY</span><b>TARGET ASSIGNED</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">NETWORK COORDINATES</p>
+              <div class="coordinate-row"><span>TARGET HOST</span><code data-target>10.23.54.38</code></div>
+              <div class="coordinate-row"><span>WEB</span><code>TCP / 80</code></div>
+              <div class="coordinate-row"><span>INTENDED TOOL</span><code>gobuster dir -x</code></div>
+              <div class="scope-warning"><b>!</b><span>One fuzz is not enough. Backup files hide behind extensions.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">MISSION OBJECTIVES</p>
+              <ol>
+                <li><span>01</span>Confirm the records office</li>
+                <li><span>02</span>Find the unlisted folder</li>
+                <li><span>03</span>Fuzz that folder with extensions</li>
+                <li><span>04</span>Read the hold identifier</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">OPERATOR LOADOUT</p>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>Gobuster</b><small>dir, then dir -x</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">F</span><span><b>ffuf</b><small>-e .bak,.old,.txt</small></span><i>READY</i></div>
+              <div class="tool-row"><span class="tool-icon">C</span><span><b>curl</b><small>Read the backup</small></span><i>READY</i></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="investigation-layout view-enter is-hidden" data-view="investigation">
+          <section class="investigation-main">
+            <div class="view-heading">
+              <div>
+                <p class="section-label">GUIDED INVESTIGATION</p>
+                <h2>Fuzz twice.</h2>
+              </div>
+              <span id="cleared-copy">0/5 CLEARED</span>
+            </div>
+            <div class="question-stack" id="question-stack" aria-live="polite"></div>
+          </section>
+          <aside class="intel-panel">
+            <div class="intel-head"><span class="pulse-dot"></span><b>OPERATOR INTEL</b></div>
+            <div class="intel-stat"><span>LAB STATUS</span><strong id="intel-status">CONNECTING</strong></div>
+            <div class="intel-stat"><span>CURRENT PHASE</span><strong id="current-phase">01 / CONFIRM TARGET</strong></div>
+            <div class="intel-stat"><span>HINTS USED</span><strong id="hints-used">00</strong></div>
+            <div class="mini-progress"><i id="mini-progress"></i></div>
+            <p>Mission Control checks your findings. It never runs gobuster for you.</p>
+            <p class="preview-link is-hidden" id="preview-target-link">Preview mode: the records office is at <a href="/site/">/site/</a>.</p>
+            <button class="primary-button compact is-hidden" id="open-debrief">Open debrief →</button>
+          </aside>
+        </section>
+
+        <section class="walkthrough view-enter is-hidden" data-view="walkthrough">
+          <section class="locked-walkthrough" id="walkthrough-lock">
+            <div class="lock-orbit"><span>03</span></div>
+            <p class="section-label">DEBRIEF LOCKED</p>
+            <h2>Try the mission first.</h2>
+            <p>The walkthrough names both fuzzes, the backup file, and the identifier. Complete the investigation, or reveal it if you are genuinely stuck.</p>
+            <div>
+              <button class="primary-button" data-view-target="investigation">Return to investigation <span>→</span></button>
+              <button class="ghost-button" id="reveal-walkthrough">Reveal full walkthrough</button>
+            </div>
+          </section>
+
+          <div class="is-hidden" id="walkthrough-content">
+            <div class="view-heading walkthrough-heading">
+              <div>
+                <p class="section-label">MISSION DEBRIEF</p>
+                <h2>Folders, then files.</h2>
+              </div>
+              <span id="walkthrough-badge" class="success-badge">MISSION COMPLETE</span>
+            </div>
+
+            <section class="debrief-summary">
+              <div><span>01</span><p>ROOT</p><b>/archive/</b></div>
+              <i>→</i>
+              <div><span>02</span><p>FLAG</p><b>-x bak,old,txt</b></div>
+              <i>→</i>
+              <div><span>03</span><p>FILE</p><b>notes.bak</b></div>
+              <i>→</i>
+              <div><span>04</span><p>PROOF</p><b>NH-3802</b></div>
+            </section>
+
+            <section class="walkthrough-step">
+              <div class="step-copy">
+                <span class="step-number">01</span>
+                <p class="section-label">ROOT FUZZ</p>
+                <h3>Same move as Unlisted Door.</h3>
+                <p>Public nav is Home, Retention, Contact. robots.txt decoys 404. gobuster on the root finds <code>/archive/</code> — a splash that says the folder is not indexed. There is no listing. Stop here and you fail the lab.</p>
+                <div class="explain-list">
+                  <div><code>/archive/</code><span>Hidden 200, no file list</span></div>
+                  <div><code>robots</code><span>/old/ and /records-old/ 404</span></div>
+                  <div><code>second fuzz</code><span>Required</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> gobuster dir -u http://10.23.54.38 -w /usr/share/wordlists/dirb/common.txt</div>
+                  <div class="terminal-output">
+                    <div class="hot">/archive          (Status: 200)</div>
+                    <div>/contact          (Status: 200)</div>
+                    <div>/policy           (Status: 200)</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>A directory-only scan of /archive will look empty.</figcaption>
+              </figure>
+            </section>
+
+            <section class="walkthrough-step reverse">
+              <div class="step-copy">
+                <span class="step-number">02</span>
+                <p class="section-label">EXTENSION FUZZ</p>
+                <h3>-x is the whole point of this lab.</h3>
+                <p>Backup copies are files, not folders. Tell gobuster to append <code>bak</code>, <code>old</code> and <code>txt</code>. ffuf does the same with <code>-e</code>.</p>
+                <div class="explain-list">
+                  <div><code>-x bak,old,txt</code><span>gobuster extensions</span></div>
+                  <div><code>-e .bak,.old,.txt</code><span>ffuf equivalent</span></div>
+                  <div><code>notes.bak</code><span>The backup</span></div>
+                </div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — zsh</b><em>EXAMPLE OUTPUT</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> gobuster dir -u http://10.23.54.38/archive -w /usr/share/wordlists/dirb/common.txt -x bak,old,txt</div>
+                  <div class="terminal-output">
+                    <div class="hot">/notes.bak        (Status: 200)</div>
+                  </div>
+                  <div class="command-line"><span>┌──(operator㉿kali)-[~]</span><br><b>└─$</b> curl -s http://10.23.54.38/archive/notes.bak</div>
+                  <div class="terminal-output">
+                    <div class="flag">Hold identifier: NH-3802</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Module 01 recon is complete. Privilege-escalation labs are next.</figcaption>
+              </figure>
+            </section>
+
+            <section class="completion-card">
+              <div>
+                <span>TRACE // 04</span>
+                <h3>Hold opened.</h3>
+                <p>You fuzzed the root, then the folder, then the extensions. That is the whole reconnaissance module: scan, do not assume port 80, fuzz, fuzz again.</p>
+              </div>
+              <div class="completion-stats">
+                <span><small>OBJECTIVES</small><b id="completion-objectives">05 / 05</b></span>
+                <span><small>HINTS USED</small><b id="completion-hints">00</b></span>
+              </div>
+              <button class="ghost-button" id="repeat-mission">Repeat mission</button>
+            </section>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <dialog class="spoiler-dialog" id="walkthrough-confirm" aria-labelledby="walkthrough-confirm-title" aria-describedby="walkthrough-confirm-copy">
+    <div class="spoiler-dialog-card">
+      <div class="spoiler-icon" aria-hidden="true">!</div>
+      <p class="section-label">SPOILER WARNING</p>
+      <h2 id="walkthrough-confirm-title">Reveal the full walkthrough?</h2>
+      <p id="walkthrough-confirm-copy">This will expose both fuzzes, the backup filename, and the hold identifier. Your debrief will be marked <strong>SOLUTION REVEALED</strong>.</p>
+      <div class="spoiler-dialog-actions">
+        <button class="ghost-button" id="cancel-walkthrough-reveal" type="button">Cancel — keep trying</button>
+        <button class="danger-button" id="confirm-walkthrough-reveal" type="button">Reveal anyway</button>
+      </div>
+      <small>You can still complete the investigation after revealing.</small>
+    </div>
+  </dialog>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>MISSION CONTROL OFFLINE</b><span>Start or reset the lab, then reload this page.</span></div>
+</body>
+</html>

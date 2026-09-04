@@ -1,0 +1,12 @@
+:root { --bg:#f4efe4; --ink:#2a241c; --rule:#d7cbb6; --accent:#8a4a28; --muted:#6b6256; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Georgia", "Times New Roman", serif; }
+main { max-width: 760px; padding: 72px 8vw 90px; }
+.kicker { font-family: "Helvetica Neue", Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; font-size: 11px; color: var(--accent); }
+h1 { font-size: clamp(36px, 6vw, 60px); line-height: .95; letter-spacing: -.03em; }
+p { color: var(--muted); line-height: 1.7; max-width: 38em; }
+aside { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 48px; border-top: 1px solid var(--rule); }
+aside div { padding: 18px 0; border-right: 1px solid var(--rule); }
+aside div:last-child { border-right: 0; }
+aside span { display: block; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+aside b { font-size: 22px; }

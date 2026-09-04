@@ -1,0 +1,7 @@
+:root { --bg:#111318; --ink:#e8e4d8; --muted:#9aa19a; --amber:#d4a017; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: ui-monospace, "Cascadia Code", monospace; }
+main { max-width: 640px; padding: 72px 28px; }
+.kicker { letter-spacing: .18em; text-transform: uppercase; font-size: 11px; color: var(--amber); }
+h1 { font-size: 32px; font-weight: 600; }
+p { color: var(--muted); line-height: 1.7; }

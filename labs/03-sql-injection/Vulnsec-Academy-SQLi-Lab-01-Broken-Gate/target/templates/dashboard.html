@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home — Northline Staff Access</title>
+  <link rel="stylesheet" href="{{base}}/static/portal.css">
+</head>
+<body class="app">
+  <aside class="side">
+    <div class="mark">N</div>
+    <nav>
+      <a class="on" href="{{base}}/dashboard">Home</a>
+      <a href="#timesheets">Timesheets</a>
+      <a href="#notices">Notices</a>
+      <a href="#directory">Directory</a>
+    </nav>
+    <a class="out" href="{{base}}/logout">Sign out</a>
+  </aside>
+  <main>
+    <header class="top">
+      <div>
+        <p class="kicker">Northline Operations</p>
+        <h1>Good shift, {{display}}</h1>
+      </div>
+      <div class="who">
+        <b>{{display}}</b>
+        <small>{{title}} · {{role}}</small>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="panel">
+        <h2>Today</h2>
+        <ul>
+          <li>07:40 — Yard briefing, Bay 3</li>
+          <li>09:15 — Access Control change window</li>
+          <li>14:00 — Incident tabletop (optional)</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h2>Notices</h2>
+        <p>Password rotation for contractor accounts is due Friday. Do not share directory credentials with vendors.</p>
+      </article>
+    </section>
+
+    {{locker}}
+  </main>
+</body>
+</html>

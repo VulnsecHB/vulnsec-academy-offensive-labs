@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff desk — Northline Yard Access</title>
+  <link rel="stylesheet" href="{{base}}/static/gate.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">YA</span>
+      <span><strong>Northline Yard Access</strong><small>Contractor passes · Internal</small></span>
+    </a>
+    <nav>
+      <a href="{{base}}/">Check</a>
+      <a class="on" href="{{base}}/account">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <main class="auth-wrap">
+    <section class="auth-card">
+      <p class="kicker">Yard desk</p>
+      <h1>Sign in</h1>
+      <p class="lede">Use your gate directory account. Clerks cannot open sealed gate logs.</p>
+      {{notice}}
+      {{error}}
+      <form method="post" action="{{base}}/account" autocomplete="off">
+        <label>Directory username
+          <input name="username" required autofocus placeholder="first.last">
+        </label>
+        <label>Password
+          <input name="password" type="password" required>
+        </label>
+        <button type="submit">Open desk</button>
+      </form>
+      <p class="help">Password resets: Yard Marshal, ext. 2200.</p>
+    </section>
+    <aside class="auth-note">
+      <h2>This desk is logged</h2>
+      <ul>
+        <li>Sealed gate logs are marshal-only</li>
+        <li>Pass reprints need two initials</li>
+        <li>Do not share a signed-in session</li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Yard Access 4.2.0</span>
+  </footer>
+</body>
+</html>

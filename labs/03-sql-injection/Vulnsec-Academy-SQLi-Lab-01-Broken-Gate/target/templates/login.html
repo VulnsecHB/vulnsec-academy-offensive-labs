@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in — Northline Staff Access</title>
+  <link rel="stylesheet" href="{{base}}/static/portal.css">
+</head>
+<body class="auth">
+  <header class="mast">
+    <div class="mark">N</div>
+    <div>
+      <strong>Northline Operations</strong>
+      <small>Staff Access · Internal</small>
+    </div>
+  </header>
+
+  <main class="auth-card">
+    <p class="kicker">Restricted system</p>
+    <h1>Sign in to continue</h1>
+    <p class="lede">Use your yard directory credentials. Access is logged and retained for 90 days.</p>
+    {{notice}}
+    {{error}}
+    <form method="post" action="{{base}}/login" autocomplete="off">
+      <label>Directory username
+        <input name="username" required autofocus placeholder="first.last">
+      </label>
+      <label>Password
+        <input name="password" type="password" required>
+      </label>
+      <button type="submit">Sign in</button>
+    </form>
+    <p class="help"><a href="#reset">Forgot password?</a> Contact Access Control on ext. 4400.</p>
+  </main>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Portal 2.4.11</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materials catalog — Northline Operations</title>
+  <link rel="stylesheet" href="{{base}}/static/catalog.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{base}}/">
+      <span class="mark">NL</span>
+      <span><strong>Northline Materials</strong><small>Spares · Internal catalog</small></span>
+    </a>
+    <nav>
+      <a class="on" href="{{base}}/">Catalog</a>
+      <a href="{{base}}/account">Desk</a>
+      {{account}}
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">Stores · live inventory</p>
+      <h1>{{heading}}</h1>
+      <p>{{lede}}</p>
+    </div>
+    <form class="search" action="{{base}}/search" method="get">
+      <label>Find a part
+        <input name="q" value="{{q}}" placeholder="SKU or description — e.g. bearing, NL-4401" autofocus>
+      </label>
+      <button type="submit">Search stock</button>
+    </form>
+  </section>
+
+  <main>
+    {{notice}}
+    {{results}}
+  </main>
+
+  <aside class="strip">
+    <div><b>Cut-off</b><span>Requisitions lock at 15:30 weekdays</span></div>
+    <div><b>Priority</b><span>Coupler pin NL-2188 on watch</span></div>
+    <div><b>Helpdesk</b><span>Materials IT · ext. 4490</span></div>
+  </aside>
+
+  <footer>
+    <span>© 2026 Northline Operations Ltd.</span>
+    <span>Classification: Internal</span>
+    <span>Catalog 3.1.8 · do not expose off-network</span>
+  </footer>
+</body>
+</html>
